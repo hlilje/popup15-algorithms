@@ -1,8 +1,12 @@
+#include "algorithms.hpp"
 #include "datastructures.hpp"
 #include <iostream>
 #include <vector>
 
 
+/**
+ * Solve the Kattis Interval Cover problem.
+ */
 void kattis_interval_cover()
 {
     long double A, B;
@@ -10,6 +14,7 @@ void kattis_interval_cover()
 
     while (std::cin >> A >> B >> n)
     {
+        Interval interval(A, B, -1);
         std::vector<Interval> parts;
         for (int i = 0; i < n; ++i)
         {
@@ -17,7 +22,17 @@ void kattis_interval_cover()
             std::cin >> left >> right;
             parts.push_back(Interval(left, right, i));
         }
-        std::cout << parts.size() << std::endl;
+
+        std::vector<int> indices = cover(interval, parts);
+
+        if (parts.size() == 0)
+            std::cout << "impossible" << std::endl;
+        else
+        {
+            std::cout << indices.size() << std::endl;
+            for (auto i : indices) std::cout << i << " ";
+            std::cout <<  std::endl;
+        }
     }
 }
 
