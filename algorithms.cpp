@@ -12,6 +12,8 @@ const std::vector<int> cover(const Interval& interval,
     long double left_coord = interval._left;
     std::vector<int> indices;
 
+    std::sort(parts.begin(), parts.end());
+
     // Special case for point interval
     if (interval._left == interval._right)
     {
@@ -38,6 +40,7 @@ const std::vector<int> cover(const Interval& interval,
         {
             ++min;
             Interval next = parts[min];
+            /* std::cout << "next: " << next._left << " " << next._right << std::endl; */
             if ((next._right > best_part._right) && (next._left <= left_coord))
             {
                 best_part = next;
