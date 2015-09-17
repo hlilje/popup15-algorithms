@@ -22,7 +22,7 @@ const std::vector<int> cover(const Interval& interval,
             Interval part = parts[i];
             if ((interval._left >= part._left) && (interval._right <= part._right))
             {
-                indices.push_back(i);
+                indices.push_back(part._index);
                 break;
             }
         }
