@@ -47,16 +47,17 @@ void kattis_longest_increasing_subsequence()
     unsigned int n;
     while (std::cin >> n)
     {
-        std::cout << "n: " << n << std::endl;
+        /* std::cout << "n: " << n << std::endl; */
         std::vector<unsigned int> integers(n);
 
         for (unsigned int i = 0; i < n; ++i)
             std::cin >> integers[i];
 
-        for (auto& i : integers) std::cout << i << " ";
-        std::cout << std::endl;
+        /* for (auto& i : integers) std::cout << i << " "; */
+        /* std::cout << std::endl; */
 
         std::vector<unsigned int> indices = lis(integers);
+        std::cout << indices.size() << std::endl;
         for (auto& i : indices) std::cout << i << " ";
         std::cout << std::endl;
     }

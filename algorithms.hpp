@@ -4,8 +4,11 @@
 #pragma once
 #include <algorithm>
 #include <iostream>
+#include <limits>
 #include <vector>
 #include "datastructures.hpp"
+
+#define MAX_UINT std::numeric_limits<unsigned int>::max()
 
 
 /**

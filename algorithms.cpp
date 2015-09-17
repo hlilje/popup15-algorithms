@@ -64,6 +64,44 @@ const std::vector<int> cover(const Interval& interval,
 
 const std::vector<unsigned int> lis(const std::vector<unsigned int>& integers)
 {
-    std::vector<unsigned int> t = {1, 2, 3};
-    return t;
+    std::vector<unsigned int> indices = {0};
+    std::vector<unsigned int> min_end = {integers.front()};
+    std::vector<int> parents(integers.size());
+    parents[0] = MAX_UINT;
+
+    std::cout << "==========" << std::endl;
+
+    for (unsigned int i = 1; i < integers.size(); ++i)
+    {
+        unsigned int selected = integers[i];
+
+        if (selected > min_end.back())
+        {
+            min_end.push_back(selected);
+            parents[i] = indices.back();
+            indices.push_back(i);
+        }
+        else
+        {
+            // Find first element not less than selected
+            auto it = std::lower_bound(min_end.begin(), min_end.end(), selected);
+            unsigned int ix = it - min_end.begin();
+            min_end[ix] = selected;
+            indices[ix] = i;
+            parents[i] = ix - 1;
+        }
+        for (auto& i : min_end) std::cout << i << " ";
+        std::cout << std::endl;
+    }
+
+    // Backtrack to find the corresponding indices
+    std::vector<unsigned int> result;
+    unsigned int parent = indices.back();
+    while (parent != MAX_UINT)
+    {
+        result.insert(result.begin(), parent);
+        parent = parents[parent];
+    }
+
+    return result;
 }
