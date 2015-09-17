@@ -1,3 +1,6 @@
+/**
+ * Authors: Hampus Liljekvist, Isak Nilsson
+ */
 #include "algorithms.hpp"
 
 
