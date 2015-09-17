@@ -39,7 +39,15 @@ void kattis_interval_cover()
     }
 }
 
+/**
+ * Solve the Kattis Longest Increasing Subsequence problem.
+ */
+void kattis_longest_increasing_subsequence()
+{
+}
+
 int main()
 {
-    kattis_interval_cover();
+    /* kattis_interval_cover(); */
+    kattis_longest_increasing_subsequence();
 }
