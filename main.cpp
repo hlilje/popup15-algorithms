@@ -1,7 +1,10 @@
+#include "datastructures.hpp"
 #include <iostream>
 
 
 int main()
 {
-    std::cout << "Hello" << std::endl;
+    Interval test(0.1, 0.2);
+
+    std::cout << test._left << std::endl;
 }
