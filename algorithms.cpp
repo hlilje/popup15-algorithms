@@ -69,7 +69,7 @@ const std::vector<unsigned int> lis(const std::vector<unsigned int>& integers)
     std::vector<int> parents(integers.size());
     parents[0] = MAX_UINT;
 
-    std::cout << "==========" << std::endl;
+    std::cout << "========" << std::endl;
 
     for (unsigned int i = 1; i < integers.size(); ++i)
     {
@@ -93,6 +93,8 @@ const std::vector<unsigned int> lis(const std::vector<unsigned int>& integers)
         for (auto& i : min_end) std::cout << i << " ";
         std::cout << std::endl;
     }
+
+    std::cout << "========" << std::endl;
 
     // Backtrack to find the corresponding indices
     std::vector<unsigned int> result;
