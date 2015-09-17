@@ -30,7 +30,7 @@ void kattis_interval_cover()
 
         std::vector<int> indices = cover(interval, parts);
 
-        if (parts.size() == 0)
+        if (indices.size() == 0)
             std::cout << "impossible" << std::endl;
         else
         {
