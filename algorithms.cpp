@@ -19,7 +19,7 @@ const std::vector<int> cover(const Interval& interval,
     {
         Interval part = parts[min];
         Interval best_part = part;
-        std::cout << "Init best: " << best_part._left << " " << best_part._right << std::endl;
+        /* std::cout << "Init best: " << best_part._left << " " << best_part._right << std::endl; */
 
         while ((part._left <= left_coord) && (min < max - 1))
         {
@@ -28,7 +28,7 @@ const std::vector<int> cover(const Interval& interval,
             if ((next._right > best_part._right) && (next._left <= left_coord))
             {
                 best_part = next;
-                std::cout << "New best: " << best_part._left << " " << best_part._right << std::endl;
+                /* std::cout << "New best: " << best_part._left << " " << best_part._right << std::endl; */
             }
             part = next;
         }
@@ -38,7 +38,7 @@ const std::vector<int> cover(const Interval& interval,
 
         indices.push_back(best_part._index);
         left_coord = best_part._right;
-        std::cout << "Pushing: " << best_part._left << " " << best_part._right << std::endl;
+        /* std::cout << "Pushing: " << best_part._left << " " << best_part._right << std::endl; */
     }
 
     // Since the last part is always added, verify that it is legit

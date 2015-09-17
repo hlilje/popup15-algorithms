@@ -17,7 +17,7 @@ void kattis_interval_cover()
 
     while (std::cin >> A >> B >> n)
     {
-        std::cout << "A: " << A << ", B: " << B << ", n: " << n << std::endl;
+        /* std::cout << "A: " << A << ", B: " << B << ", n: " << n << std::endl; */
 
         Interval interval(A, B, -1);
         std::vector<Interval> parts(n);
@@ -28,8 +28,8 @@ void kattis_interval_cover()
             parts[i] = Interval(left, right, i);
         }
 
-        for (auto& i : parts)
-            std::cout << i._left << " " << i._right << std::endl;
+        /* for (auto& i : parts) */
+        /*     std::cout << i._left << " " << i._right << std::endl; */
 
         std::vector<int> indices = cover(interval, parts);
 
@@ -42,7 +42,7 @@ void kattis_interval_cover()
             std::cout <<  std::endl;
         }
 
-        std::cout << "========" << std::endl;
+        /* std::cout << "========" << std::endl; */
     }
 }
 

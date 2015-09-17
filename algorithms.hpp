@@ -9,7 +9,7 @@
 
 
 /**
- * Cover the given full interval using the interval parts.
+ * Try to cover the given full interval using the interval parts.
  *
  * @param interval: The full interval to cover.
  * @param parts:    The available intervals.
