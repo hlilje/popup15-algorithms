@@ -61,3 +61,9 @@ const std::vector<int> cover(const Interval& interval,
 
     return indices;
 }
+
+const std::vector<unsigned int> lis(const std::vector<unsigned int>& integers)
+{
+    std::vector<unsigned int> t = {1, 2, 3};
+    return t;
+}

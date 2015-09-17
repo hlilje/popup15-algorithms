@@ -18,3 +18,11 @@
  *                  interval could not be covered.
  */
 const std::vector<int> cover(const Interval&, std::vector<Interval>&);
+
+/**
+ * Find the longest increasing subsequence of positive integers.
+ *
+ * @param integers: A vector containing the full sequence.
+ * @return:         The indices of the longest increasing subsequence.
+ */
+const std::vector<unsigned int> lis(const std::vector<unsigned int>&);
