@@ -7,7 +7,7 @@ Interval::Interval(const long double left, const long double right,
 {
 }
 
-const bool Interval::operator<(const Interval& other) const
+bool Interval::operator<(const Interval& other) const
 {
     return _left < other._left;
 }

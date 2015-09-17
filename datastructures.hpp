@@ -10,5 +10,5 @@ class Interval
 
         Interval(long double, long double, int);
 
-        const bool operator<(const Interval&) const;
+        bool operator<(const Interval&) const;
 };

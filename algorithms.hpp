@@ -3,4 +3,4 @@
 #include <vector>
 
 
-std::vector<int> cover(const Interval&, std::vector<Interval>&);
+const std::vector<int> cover(const Interval&, std::vector<Interval>&);
