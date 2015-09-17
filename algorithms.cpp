@@ -10,6 +10,7 @@ const std::vector<int> cover(const Interval& interval,
     int min = 0;
     int max = parts.size();
     long double left_coord = interval._left;
+    std::vector<Interval> original_parts = parts;
     std::vector<int> indices;
 
     std::sort(parts.begin(), parts.end());
@@ -60,7 +61,8 @@ const std::vector<int> cover(const Interval& interval,
     // Since the last part is always added, verify that it is legit
     if ((max > 0) && (indices.size() > 0))
     {
-        Interval last = parts[indices.back()];
+        Interval last = original_parts[indices.back()];
+        /* std::cout << "last: " << last._left << " " << last._right << std::endl; */
         if ((last._left > left_coord) || (last._right < interval._right))
             indices.clear();
     }
