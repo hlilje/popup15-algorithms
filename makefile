@@ -6,7 +6,7 @@ TARGET = main
 all: $(TARGET)
 
 $(TARGET): $(TARGET).cpp
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRCS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET).out $(SRCS)
 
 clean:
-	rm -f *.o $(TARGET)
+	rm -f *.o $(TARGET).out

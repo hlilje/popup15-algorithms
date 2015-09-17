@@ -4,11 +4,14 @@
 class Interval
 {
     public:
-        const long double _left;
-        const long double _right;
-        const int _index;
+        long double _left;
+        long double _right;
+        int _index;
 
+        Interval();
         Interval(long double, long double, int);
+        ~Interval();
 
+        Interval& operator=(const Interval&);
         bool operator<(const Interval&) const;
 };
