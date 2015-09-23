@@ -10,14 +10,14 @@
 struct fenwick
 {
     private:
-        const long int _size;
-        long int* _tree;
+        const long long int _size;
+        long long int* _tree;
 
     public:
         /**
          * @param input_size: The size of the tree.
          */
-        fenwick(const long int);
+        fenwick(const long long int);
 
         ~fenwick();
 
@@ -27,7 +27,7 @@ struct fenwick
          * @param idx: Index for the end of the prefix to sum.
          * @return: The prefix sum.
          */
-        long int read(long int);
+        long long int read(long long int);
 
         /**
          * Update the tree with the given value.
@@ -35,5 +35,5 @@ struct fenwick
          * @param idx: The index of node to change.
          * @param val: The amount to change.
          */
-        void update(long int, const long int);
+        void update(long long int, const long long int);
 };

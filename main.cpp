@@ -4,8 +4,36 @@
 #include <iostream>
 #include <vector>
 #include "algorithms.hpp"
+#include "fenwick.hpp"
 #include "interval.hpp"
 
+
+/**
+ * Solve the Kattis Fenwick Tree problem.
+ */
+void kattis_fenwick_tree()
+{
+    long long int N, Q;
+    std::cin >> N >> Q;
+    std::cout << N << " " << Q << std::endl;
+    for (long long int i = 0; i < Q; ++i)
+    {
+        std::string op;
+        std::cin >> op;
+        if (op.compare("+") == 0)
+        {
+            long long int i, delta;
+            std::cin >> i >> delta;
+            std::cout << i << " " << delta << std::endl;
+        }
+        else if (op.compare("?") == 0)
+        {
+            long long int i;
+            std::cin >> i;
+            std::cout << i << std::endl;
+        }
+    }
+}
 
 /**
  * Solve the Kattis Interval Cover problem.
@@ -61,6 +89,7 @@ void kattis_longest_increasing_subsequence()
 
 int main()
 {
-    kattis_interval_cover();
+    /* kattis_interval_cover(); */
     /* kattis_longest_increasing_subsequence(); */
+    kattis_fenwick_tree();
 }
