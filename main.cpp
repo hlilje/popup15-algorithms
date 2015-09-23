@@ -13,24 +13,24 @@
  */
 void kattis_fenwick_tree()
 {
-    long long int N, Q;
-    std::cin >> N >> Q;
-    std::cout << N << " " << Q << std::endl;
+    long long int N, Q; std::cin >> N >> Q;
+    fenwick tree(N + 1);
     for (long long int i = 0; i < Q; ++i)
     {
         std::string op;
         std::cin >> op;
         if (op.compare("+") == 0)
         {
-            long long int i, delta;
-            std::cin >> i >> delta;
-            std::cout << i << " " << delta << std::endl;
+            long long int i, delta; std::cin >> i >> delta;
+            tree.update(i, delta);
         }
         else if (op.compare("?") == 0)
         {
-            long long int i;
-            std::cin >> i;
-            std::cout << i << std::endl;
+            long long int i; std::cin >> i;
+            /* if (i == 1) */
+            /*     std::cout << 0 << std::endl; */
+            /* else */
+            std::cout << tree.read(i) << std::endl;
         }
     }
 }
