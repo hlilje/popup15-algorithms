@@ -44,21 +44,15 @@ void kattis_interval_cover()
  */
 void kattis_longest_increasing_subsequence()
 {
-    unsigned int n;
+    long int n;
     while (std::cin >> n)
     {
-        std::cout << "n: " << n << std::endl;
-        std::vector<unsigned int> integers(n);
+        std::vector<long int> integers(n);
 
-        for (unsigned int i = 0; i < n; ++i)
+        for (long int i = 0; i < n; ++i)
             std::cin >> integers[i];
 
-        std::cout << "integers: " << std::endl;
-        for (auto& i : integers) std::cout << i << " ";
-        std::cout << std::endl;
-
-        std::cout << "Result:" << std::endl;
-        std::vector<unsigned int> indices = lis(integers);
+        std::vector<long int> indices = lis(integers);
         std::cout << indices.size() << std::endl;
         for (auto& i : indices) std::cout << i << " ";
         std::cout << std::endl;

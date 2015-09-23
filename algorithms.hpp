@@ -8,7 +8,7 @@
 #include <vector>
 #include "datastructures.hpp"
 
-#define MAX_UINT std::numeric_limits<unsigned int>::max()
+#define MAX_LINT std::numeric_limits<long int>::max()
 
 
 /**
@@ -28,4 +28,4 @@ const std::vector<int> cover(const Interval&, std::vector<Interval>&);
  * @param integers: A vector containing the full sequence.
  * @return:         The indices of the longest increasing subsequence.
  */
-const std::vector<unsigned int> lis(const std::vector<unsigned int>&);
+const std::vector<long int> lis(const std::vector<long int>&);
