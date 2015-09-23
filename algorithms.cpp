@@ -88,7 +88,10 @@ const std::vector<unsigned int> lis(const std::vector<unsigned int>& integers)
             unsigned int ix = it - min_end.begin();
             min_end[ix] = selected;
             indices[ix] = i;
-            parents[i] = ix - 1;
+            if (ix > 0)
+                parents[i] = indices[ix - 1];
+            else
+                parents[i] = MAX_UINT;
         }
         for (auto& i : min_end) std::cout << i << " ";
         std::cout << std::endl;
