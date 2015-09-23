@@ -15,9 +15,17 @@ class Interval
         int _index;         // Interval index
 
         Interval();
+
+        /**
+         * @param left:  Left interval bound (inclusive).
+         * @param right: Right interval bound (inclusive).
+         * @param index: Interval index.
+         */
         Interval(long double, long double, int);
+
         ~Interval();
 
         Interval& operator=(const Interval&);
+
         bool operator<(const Interval&) const;
 };
