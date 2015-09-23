@@ -6,7 +6,7 @@
 #include <iostream>
 #include <limits>
 #include <vector>
-#include "datastructures.hpp"
+#include "interval.hpp"
 
 #define MAX_LINT std::numeric_limits<long int>::max()
 

@@ -1,7 +1,7 @@
 /**
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
-#include "datastructures.hpp"
+#include "interval.hpp"
 
 
 Interval::Interval() : _left(0.0), _right(0.0), _index(-1)

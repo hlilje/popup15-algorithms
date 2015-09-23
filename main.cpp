@@ -1,10 +1,10 @@
 /**
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
-#include "algorithms.hpp"
-#include "datastructures.hpp"
 #include <iostream>
 #include <vector>
+#include "algorithms.hpp"
+#include "interval.hpp"
 
 
 /**
@@ -61,6 +61,6 @@ void kattis_longest_increasing_subsequence()
 
 int main()
 {
-    /* kattis_interval_cover(); */
-    kattis_longest_increasing_subsequence();
+    kattis_interval_cover();
+    /* kattis_longest_increasing_subsequence(); */
 }
