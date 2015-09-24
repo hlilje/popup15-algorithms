@@ -17,14 +17,14 @@ void kattis_fenwick_tree()
     fenwick tree(N + 1);
     for (long long int i = 0; i < Q; ++i)
     {
-        std::string op;
+        char op;
         std::cin >> op;
-        if (op.compare("+") == 0)
+        if (op == '+')
         {
             long long int i, delta; std::cin >> i >> delta;
             tree.add(i, delta);
         }
-        else if (op.compare("?") == 0)
+        else if (op == '?')
         {
             long long int i; std::cin >> i;
             /* if (i == 1) */
