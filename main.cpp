@@ -4,6 +4,7 @@
 #include "algorithms.hpp"
 #include "fenwick.hpp"
 #include "interval.hpp"
+#include "set.hpp"
 #include "test_generator.hpp"
 #include <iostream>
 #include <vector>
@@ -95,6 +96,10 @@ void kattis_longest_increasing_subsequence()
 void kattis_union_find()
 {
     long int N, Q; std::cin >> N >> Q;
+    std::vector<set*> sets(N);
+
+    for (long int i = 0; i < N; ++i)
+        sets[i] = new set(i + 1);
 
     for (long int i = 0; i < Q; ++i)
     {
@@ -104,11 +109,19 @@ void kattis_union_find()
 
         if (op == '=')
         {
+            set_union(sets[a], sets[b]);
         }
         else if (op == '?')
         {
+            if (same(sets[a], sets[b]))
+                std::cout << "yes" << std::endl;
+            else
+                std::cout << "no" << std::endl;
         }
     }
+
+    for (long int i = 0; i < N; ++i)
+        delete sets[i];
 }
 
 int main()
