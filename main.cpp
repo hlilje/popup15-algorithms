@@ -84,9 +84,6 @@ void kattis_knapsack()
             value_weight[i] = std::pair<int, int>(value, weight);
         }
 
-        /* for (auto i : value_weight) */
-        /*     std::cout << i.first << " " << i.second << std::endl; */
-
         std::vector<int> indices = knapsack(C, value_weight);
 
         std::cout << indices.size() << std::endl;

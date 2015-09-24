@@ -65,39 +65,34 @@ const std::vector<int> cover(const Interval& interval,
 std::vector<int> knapsack(const int capacity, const int_pairs& value_weight)
 {
     std::vector<int> indices;
-    std::vector<int> max_val(capacity + 1);
-    bool_matrix used(capacity + 1, std::vector<bool>(value_weight.size(), false));
-    max_val[0] = 0;
+    int_matrix max_val(value_weight.size() + 1,
+                       std::vector<int>(capacity + 1, 0));
 
-    for (int i = 1; i < capacity + 1; ++i)
+    for (int i = 1; i < (int) value_weight.size() + 1; ++i)
     {
-        int max = 0;
-        int best_item = 0;
-        for (int j = 0; j < (int) value_weight.size(); ++j)
+        std::pair<int, int> item = value_weight[i - 1];
+        int value = item.first;
+        int weight = item.second;
+        for (int j = 0; j < capacity + 1; ++j)
         {
-            std::pair<int, int> item = value_weight[j];
-            int value = item.first;
-            int weight = item.second;
-            if (weight <= i)
+            if (weight <= j)
             {
-                int prospect = max_val[i - weight] + value;
-                if ((prospect > max) && (!used[i - weight][j]))
-                {
-                    max = prospect;
-                    best_item = j;
-                }
+                max_val[i][j] = std::max(max_val[i - 1][j],
+                                         max_val[i - 1][j - weight] + value);
             }
+            else
+                max_val[i][j] = max_val[i - 1][j];
         }
-        max_val[i] = max;
-        // Reuse the list from the smaller knapsack
-        std::copy(used[i - best_item].begin(), used[i - best_item].end(),
-                  used[i].begin());
-        used[i][best_item] = true;
     }
 
-    for (int i = 1; i < capacity + 1; ++i)
+    int j = capacity;
+    for (int i = value_weight.size(); i > 1; --i)
     {
-        if (used[capacity][i]) indices.push_back(i);
+        if (max_val[i][j] != max_val[i - 1][j])
+        {
+            indices.push_back(i - 1);
+            j -= value_weight[i - 1].second;
+        }
     }
 
     return indices;

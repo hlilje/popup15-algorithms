@@ -11,7 +11,7 @@
 
 #define MAX_LINT std::numeric_limits<long int>::max()
 
-typedef std::vector< std::vector<bool> > bool_matrix;
+typedef std::vector< std::vector<int> > int_matrix;
 typedef std::vector< std::pair<int, int> > int_pairs;
 
 
