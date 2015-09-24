@@ -68,6 +68,25 @@ void kattis_interval_cover()
 }
 
 /**
+ * Solve the Kattis Knapsack problem.
+ */
+void kattis_knapsack()
+{
+    double C_dbl; // Capacity
+    int n;        // Num objects
+    while (std::cin >> C_dbl >> n)
+    {
+        int C = (int) C_dbl; // Weights are integers
+        std::cout << C << " " << n << std::endl;
+        for (int i = 0; i < n; ++i)
+        {
+            int value, weight; std::cin >> value >> weight;
+            std::cout << value << " " << weight << std::endl;
+        }
+    }
+}
+
+/**
  * Solve the Kattis Longest Increasing Subsequence problem.
  */
 void kattis_longest_increasing_subsequence()
@@ -129,6 +148,6 @@ int main()
     /* kattis_interval_cover(); */
     /* kattis_longest_increasing_subsequence(); */
     /* kattis_fenwick_tree(); */
-    kattis_union_find();
-    /* generate_union_find_test(1000000); */
+    /* kattis_union_find(); */
+    kattis_knapsack();
 }
