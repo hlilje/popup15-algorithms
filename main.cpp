@@ -77,12 +77,22 @@ void kattis_knapsack()
     while (std::cin >> C_dbl >> n)
     {
         int C = (int) C_dbl; // Weights are integers
-        std::cout << C << " " << n << std::endl;
+        int_pairs value_weight(n);
         for (int i = 0; i < n; ++i)
         {
             int value, weight; std::cin >> value >> weight;
-            std::cout << value << " " << weight << std::endl;
+            value_weight[i] = std::pair<int, int>(value, weight);
         }
+
+        /* for (auto i : value_weight) */
+        /*     std::cout << i.first << " " << i.second << std::endl; */
+
+        std::vector<int> indices = knapsack(C, value_weight);
+
+        std::cout << indices.size() << std::endl;
+        for (const auto& ix : indices)
+            std::cout << ix << " ";
+        std::cout << std::endl;
     }
 }
 

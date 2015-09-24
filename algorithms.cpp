@@ -62,6 +62,47 @@ const std::vector<int> cover(const Interval& interval,
     return indices;
 }
 
+std::vector<int> knapsack(const int capacity, const int_pairs& value_weight)
+{
+    std::vector<int> indices;
+    std::vector<int> max_val(capacity + 1);
+    bool_matrix used(capacity + 1, std::vector<bool>(value_weight.size(), false));
+    max_val[0] = 0;
+
+    for (int i = 1; i < capacity + 1; ++i)
+    {
+        int max = 0;
+        int best_item = 0;
+        for (int j = 0; j < (int) value_weight.size(); ++j)
+        {
+            std::pair<int, int> item = value_weight[j];
+            int value = item.first;
+            int weight = item.second;
+            if (weight <= i)
+            {
+                int prospect = max_val[i - weight] + value;
+                if ((prospect > max) && (!used[i - weight][j]))
+                {
+                    max = prospect;
+                    best_item = j;
+                }
+            }
+        }
+        max_val[i] = max;
+        // Reuse the list from the smaller knapsack
+        std::copy(used[i - best_item].begin(), used[i - best_item].end(),
+                  used[i].begin());
+        used[i][best_item] = true;
+    }
+
+    for (int i = 1; i < capacity + 1; ++i)
+    {
+        if (used[capacity][i]) indices.push_back(i);
+    }
+
+    return indices;
+}
+
 const std::vector<long int> lis(const std::vector<long int>& integers)
 {
     std::vector<long int> indices = {0};
