@@ -4,6 +4,7 @@
 #include "algorithms.hpp"
 #include "fenwick.hpp"
 #include "interval.hpp"
+#include "test_generator.hpp"
 #include <iostream>
 #include <vector>
 
@@ -92,4 +93,5 @@ int main()
     /* kattis_interval_cover(); */
     /* kattis_longest_increasing_subsequence(); */
     kattis_fenwick_tree();
+    /* generate_fenwick_test(5000000); */
 }
