@@ -32,9 +32,6 @@ void kattis_fenwick_tree()
         else if (op == '?')
         {
             long long int i; std::cin >> i;
-            /* if (i == 1) */
-            /*     std::cout << 0 << std::endl; */
-            /* else */
             std::cout << tree.sum(i) << std::endl;
         }
     }
@@ -92,10 +89,32 @@ void kattis_longest_increasing_subsequence()
     }
 }
 
+/**
+ * Solve the Kattis Union-Find problem.
+ */
+void kattis_union_find()
+{
+    long int N, Q; std::cin >> N >> Q;
+
+    for (long int i = 0; i < Q; ++i)
+    {
+        char op;
+        long int a, b;
+        std::cin >> op >> a >> b;
+
+        if (op == '=')
+        {
+        }
+        else if (op == '?')
+        {
+        }
+    }
+}
+
 int main()
 {
     /* kattis_interval_cover(); */
     /* kattis_longest_increasing_subsequence(); */
-    kattis_fenwick_tree();
-    /* generate_fenwick_test(5000000); */
+    /* kattis_fenwick_tree(); */
+    kattis_union_find();
 }
