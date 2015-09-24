@@ -15,9 +15,6 @@
  */
 void kattis_fenwick_tree()
 {
-    // Turn off sync with C I/O for speed
-    std::iostream::sync_with_stdio(false);
-
     long long int N, Q; std::cin >> N >> Q;
     fenwick tree(N + 1);
 
@@ -126,8 +123,12 @@ void kattis_union_find()
 
 int main()
 {
+    // Turn off sync with C I/O for speed
+    std::iostream::sync_with_stdio(false);
+
     /* kattis_interval_cover(); */
     /* kattis_longest_increasing_subsequence(); */
     /* kattis_fenwick_tree(); */
     kattis_union_find();
+    /* generate_union_find_test(1000000); */
 }
