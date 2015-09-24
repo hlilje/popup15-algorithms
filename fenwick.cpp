@@ -7,8 +7,7 @@
 fenwick::fenwick(const long long int input_size) :
     _size(input_size + 1)
 {
-    _tree = new long long int[_size + 1];
-    
+    _tree = new long long int[_size + 1]();
 }
 
 fenwick::~fenwick()
@@ -29,6 +28,7 @@ long long int fenwick::sum(long long int end)
 
 void fenwick::add(long long int i , const long long int delta)
 {
+    ++i;
     while (i <= _size)
     {
         _tree[i] += delta;
