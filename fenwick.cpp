@@ -5,9 +5,10 @@
 
 
 fenwick::fenwick(const long long int input_size) :
-    _size(input_size)
+    _size(input_size + 1)
 {
-    _tree = new long long int[_size];
+    _tree = new long long int[_size + 1];
+    
 }
 
 fenwick::~fenwick()
