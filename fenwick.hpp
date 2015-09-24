@@ -22,18 +22,18 @@ struct fenwick
         ~fenwick();
 
         /**
-         * Read the index sum.
+         * Get the tree sum up to end (exclusive).
          *
-         * @param idx: Index for the end of the prefix to sum.
-         * @return: The prefix sum.
+         * @param end: Index for the end of the prefix to sum.
+         * @return:    The prefix sum.
          */
-        long long int read(long long int);
+        long long int sum(long long int);
 
         /**
-         * Update the tree with the given value.
+         * Increment the tree at the given position with the given value.
          *
-         * @param idx: The index of node to change.
-         * @param val: The amount to change.
+         * @param i:     The index of node to change.
+         * @param delta: The amount to change.
          */
-        void update(long long int, const long long int);
+        void add(long long int, const long long int);
 };

@@ -22,7 +22,7 @@ void kattis_fenwick_tree()
         if (op.compare("+") == 0)
         {
             long long int i, delta; std::cin >> i >> delta;
-            tree.update(i, delta);
+            tree.add(i, delta);
         }
         else if (op.compare("?") == 0)
         {
@@ -30,7 +30,7 @@ void kattis_fenwick_tree()
             /* if (i == 1) */
             /*     std::cout << 0 << std::endl; */
             /* else */
-            std::cout << tree.read(i) << std::endl;
+            std::cout << tree.sum(i) << std::endl;
         }
     }
 }

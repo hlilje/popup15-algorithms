@@ -15,22 +15,22 @@ fenwick::~fenwick()
     delete [] _tree;
 }
 
-long long int fenwick::read(long long int idx)
+long long int fenwick::sum(long long int end)
 {
-    long long int sum = 0;
-    while (idx > 0)
+    long long int acc_sum = 0;
+    while (end > 0)
     {
-        sum += _tree[idx];
-        idx -= (idx & -idx);
+        acc_sum += _tree[end];
+        end -= (end & -end);
     }
-    return sum;
+    return acc_sum;
 }
 
-void fenwick::update(long long int idx , const long long int val)
+void fenwick::add(long long int i , const long long int delta)
 {
-    while (idx <= _size)
+    while (i <= _size)
     {
-        _tree[idx] += val;
-        idx += (idx & -idx);
+        _tree[i] += delta;
+        i += (i & -i);
     }
 }
