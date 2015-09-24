@@ -62,18 +62,19 @@ const std::vector<int> cover(const Interval& interval,
     return indices;
 }
 
-std::vector<int> knapsack(const int capacity, const int_pairs& value_weight)
+std::vector<long int> knapsack(const long int capacity,
+                               const int_pairs& value_weight)
 {
-    std::vector<int> indices;
+    std::vector<long int> indices;
     int_matrix max_val(value_weight.size() + 1,
-                       std::vector<int>(capacity + 1, 0));
+                       std::vector<long int>(capacity + 1, 0));
 
-    for (int i = 1; i < (int) value_weight.size() + 1; ++i)
+    for (long int i = 1; i < (long int) value_weight.size() + 1; ++i)
     {
-        std::pair<int, int> item = value_weight[i - 1];
-        int value = item.first;
-        int weight = item.second;
-        for (int j = 0; j < capacity + 1; ++j)
+        std::pair<long int, long int> item = value_weight[i - 1];
+        long int value = item.first;
+        long int weight = item.second;
+        for (long int j = 0; j < capacity + 1; ++j)
         {
             if (weight <= j)
             {
@@ -85,8 +86,8 @@ std::vector<int> knapsack(const int capacity, const int_pairs& value_weight)
         }
     }
 
-    int j = capacity;
-    for (int i = value_weight.size(); i > 1; --i)
+    long int j = capacity;
+    for (long int i = value_weight.size(); i > 1; --i)
     {
         if (max_val[i][j] != max_val[i - 1][j])
         {

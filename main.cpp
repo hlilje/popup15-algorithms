@@ -6,6 +6,7 @@
 #include "interval.hpp"
 #include "set.hpp"
 #include "test_generator.hpp"
+#include <cassert>
 #include <iostream>
 #include <vector>
 
@@ -73,18 +74,20 @@ void kattis_interval_cover()
 void kattis_knapsack()
 {
     double C_dbl; // Capacity
-    int n;        // Num objects
+    long int n;        // Num objects
     while (std::cin >> C_dbl >> n)
     {
-        int C = (int) C_dbl; // Weights are integers
+        long int C = (long int) C_dbl; // Weights are long integers
         int_pairs value_weight(n);
-        for (int i = 0; i < n; ++i)
+        for (long int i = 0; i < n; ++i)
         {
-            int value, weight; std::cin >> value >> weight;
-            value_weight[i] = std::pair<int, int>(value, weight);
+            long int value, weight; std::cin >> value >> weight;
+            value_weight[i] = std::pair<long int, long int>(value, weight);
         }
 
-        std::vector<int> indices = knapsack(C, value_weight);
+        std::vector<long int> indices = knapsack(C, value_weight);
+
+        assert(indices.size() > 0);
 
         std::cout << indices.size() << std::endl;
         for (const auto& ix : indices)

@@ -11,8 +11,8 @@
 
 #define MAX_LINT std::numeric_limits<long int>::max()
 
-typedef std::vector< std::vector<int> > int_matrix;
-typedef std::vector< std::pair<int, int> > int_pairs;
+typedef std::vector< std::vector<long int> > int_matrix;
+typedef std::vector< std::pair<long int, long int> > int_pairs;
 
 
 /**
@@ -34,7 +34,7 @@ const std::vector<int> cover(const Interval&, std::vector<Interval>&);
  * @return:             A vector of integers representing the indices of
  *                      chosen items.
  */
-std::vector<int> knapsack(const int, const int_pairs&);
+std::vector<long int> knapsack(const long int, const int_pairs&);
 
 /**
  * Find the longest increasing subsequence of positive integers.
