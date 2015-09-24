@@ -1,11 +1,11 @@
 /**
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
-#include <iostream>
-#include <vector>
 #include "algorithms.hpp"
 #include "fenwick.hpp"
 #include "interval.hpp"
+#include <iostream>
+#include <vector>
 
 
 /**

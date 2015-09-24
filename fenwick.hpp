@@ -10,8 +10,8 @@
 struct fenwick
 {
     private:
-        const long long int _size;
-        long long int* _tree;
+        const long long int _size; // Size of tree
+        long long int* _tree;      // Tree container
 
     public:
         /**

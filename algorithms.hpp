@@ -2,11 +2,11 @@
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 #pragma once
+#include "interval.hpp"
 #include <algorithm>
 #include <iostream>
 #include <limits>
 #include <vector>
-#include "interval.hpp"
 
 #define MAX_LINT std::numeric_limits<long int>::max()
 
