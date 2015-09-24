@@ -14,8 +14,12 @@
  */
 void kattis_fenwick_tree()
 {
+    // Turn off sync with C I/O for speed
+    std::iostream::sync_with_stdio(false);
+
     long long int N, Q; std::cin >> N >> Q;
     fenwick tree(N + 1);
+
     for (long long int i = 0; i < Q; ++i)
     {
         char op;
