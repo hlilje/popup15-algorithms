@@ -87,7 +87,7 @@ std::vector<long int> knapsack(const long int capacity,
     }
 
     long int j = capacity;
-    for (long int i = num_objects; i > 1; --i)
+    for (long int i = num_objects; i >= 1; --i)
     {
         if (max_val[i][j] != max_val[i - 1][j])
         {
