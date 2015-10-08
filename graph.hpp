@@ -17,7 +17,9 @@ struct Graph
 {
     Graph(const std::size_t);
 
+    // _nodes[i][j] = neighbour j of i
     std::vector<std::vector<long>> _nodes;
+    // _nodes[i][j] = weight for edge i -> j
     std::vector<std::vector<T>> _weights;
 };
 
@@ -29,6 +31,14 @@ struct PairComp
 };
 
 
+/*
+ * Find the shortest paths between the start node and all other nodes using
+ * Dijkstra's algorithm.
+ *
+ * @param graph: Graph struct.
+ * @param start: Index for start node.
+ * @return:      A pair of parent/distances vectors.
+ */
 template<typename T>
 std::pair<std::vector<long>, std::vector<T>>
 shortest_path(const Graph<T>&, const long);
