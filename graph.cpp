@@ -30,7 +30,7 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
     std::vector<long> parents(num_nodes);
 
     dist[start] = 0; // Not generic
-    status[start] = PROCESSING;
+    status[start] = DONE;
 
     // Initialise all neighbours of start node
     for (auto const& neighbour : graph._nodes[start])
