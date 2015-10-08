@@ -5,6 +5,7 @@
 #define GRAPH_H
 
 #include <cassert>
+#include <iostream>
 #include <limits>
 #include <vector>
 

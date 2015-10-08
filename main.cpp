@@ -147,13 +147,17 @@ void kattis_shortest_path_non_neg()
             graph._weights[v][u] = w;
 
         }
-        std::pair<std::vector<long>, std::vector<long>> dist_parents =
+        std::pair<std::vector<long>, std::vector<long>> parents_dist =
                 shortest_path(graph, s);
-        std::vector<long> dist = dist_parents.first;
+        std::vector<long> dist = parents_dist.second;
         for (long i = 0; i < q; ++i)
         {
             long target; std::cin >> target;
-            std::cout << dist[target] << std::endl;
+            long distance = dist[target];
+            if (distance != std::numeric_limits<long>::max())
+                std::cout << distance << std::endl;
+            else
+                std::cout << "Impossible" << std::endl;
         }
     }
 }
