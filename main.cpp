@@ -2,6 +2,7 @@
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 /* #include "fenwick.hpp" */
+#include "graph.hpp"
 /* #include "interval_cover.hpp" */
 /* #include "knapsack.hpp" */
 /* #include "lis.hpp" */
@@ -129,23 +130,31 @@ void kattis_longest_increasing_subsequence()
  * Solve the Kattis Single Source Shortest Path, Non-Negative Weights problem.
  * Additionally solves the construction problem.
  */
-void kattis_shortest_path_non_neg() {
+void kattis_shortest_path_non_neg()
+{
     long n, m, q, s;
-    while (std::cin >> n >> m >> q >> s) {
+    while (std::cin >> n >> m >> q >> s)
+    {
         if (n == 0 && m == 0 && q == 0 && s == 0)
             break;
-        std::cout << n << " " << m  << " " << q  << " " << s << std::endl;
-        for (long i = 0; i < m; ++i) {
+        Graph<long> graph(n);
+        for (long i = 0; i < m; ++i)
+        {
             long u, v, w; std::cin >> u >> v >> w;
-            std::cout << u << " " << v << " " << w << std::endl;
+            graph._nodes[u].push_back(v);
+            graph._nodes[v].push_back(u);
+            graph._weights[u][v] = w;
+            graph._weights[v][u] = w;
+
         }
-        for (long i = 0; i < q; ++i) {
+        for (long i = 0; i < q; ++i)
+        {
             long a; std::cin >> a;
             std::cout << a << std::endl;
         }
+        shortest_path(graph, 1);
     }
 }
-
 
 /*
  * Solve the Kattis Union-Find problem.
