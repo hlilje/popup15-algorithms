@@ -23,7 +23,7 @@ void generate_fenwick_test(const long long int);
 void generate_union_find_test(const long long int);
 
 /*
- * Generate a test case for integer non-negative shortest 
+ * Generate a test case for integer non-negative shortest
  * path Dijkstra.
  *
  * @param nodes: Number of nodes in the graph.
