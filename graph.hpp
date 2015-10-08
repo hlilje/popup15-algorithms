@@ -21,6 +21,13 @@ struct Graph
     std::vector<std::vector<T>> _weights;
 };
 
+template<typename T>
+struct PairComp
+{
+    bool operator ()(const std::pair<T, long>&,
+                     const std::pair<T, long>&);
+};
+
 
 template<typename T>
 std::pair<std::vector<long>, std::vector<T>>
