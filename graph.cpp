@@ -16,7 +16,7 @@ using t_vec = std::vector<T>;
 template<typename T>
 Graph<T>::Graph(const std::size_t num_nodes) :
     _nodes(std::vector<long_vec>(num_nodes)),
-    _weights(std::vector<t_vec<T>>(num_nodes, t_vec<T>(num_nodes))) { }
+    _weights(std::vector<t_vec<T>>(num_nodes, t_vec<T>(num_nodes, INF))) { }
 
 
 template<typename T>
@@ -68,7 +68,7 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
         {
             if (status[node] != DONE)
             {
-                T new_dist = graph._weights[node][cheapest_node] +
+                T new_dist = graph._weights[cheapest_node][node] +
                              dist[cheapest_node];
                 if (new_dist < dist[node])
                 {

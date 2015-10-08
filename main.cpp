@@ -132,19 +132,15 @@ void kattis_longest_increasing_subsequence()
  */
 void kattis_shortest_path_non_neg()
 {
-    long n, m, q, s;
-    while (std::cin >> n >> m >> q >> s)
+    long n, m, q, s; std::cin >> n >> m >> q >> s;
+    while (!(n == 0 && m == 0 && q == 0 && s == 0))
     {
-        if (n == 0 && m == 0 && q == 0 && s == 0)
-            break;
         Graph<long> graph(n);
         for (long i = 0; i < m; ++i)
         {
             long u, v, w; std::cin >> u >> v >> w;
             graph._nodes[u].push_back(v);
-            graph._nodes[v].push_back(u);
             graph._weights[u][v] = w;
-            graph._weights[v][u] = w;
 
         }
         std::pair<std::vector<long>, std::vector<long>> parents_dist =
@@ -159,6 +155,9 @@ void kattis_shortest_path_non_neg()
             else
                 std::cout << "Impossible" << std::endl;
         }
+        std::cin >> n >> m >> q >> s;
+        if (!(n == 0 && m == 0 && q == 0 && s == 0))
+            std::cout << std::endl;
     }
 }
 
