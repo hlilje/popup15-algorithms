@@ -132,9 +132,12 @@ void kattis_longest_increasing_subsequence()
  */
 void kattis_shortest_path_non_neg()
 {
-    long n, m, q, s; std::cin >> n >> m >> q >> s;
-    while (!(n == 0 && m == 0 && q == 0 && s == 0))
+    long n, m, q, s;
+    while (std::cin >> n >> m >> q >> s)
     {
+        if (n == 0 && m == 0 && q == 0 && s == 0)
+            break;
+
         Graph<long> graph(n);
         for (long i = 0; i < m; ++i)
         {
@@ -155,9 +158,7 @@ void kattis_shortest_path_non_neg()
             else
                 std::cout << "Impossible" << std::endl;
         }
-        std::cin >> n >> m >> q >> s;
-        if (!(n == 0 && m == 0 && q == 0 && s == 0))
-            std::cout << std::endl;
+        std::cout << std::endl;
     }
 }
 
