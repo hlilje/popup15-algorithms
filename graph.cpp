@@ -24,7 +24,7 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
                                             const long start)
 {
     auto num_nodes = graph._nodes.size();
-    std::vector<long> active;
+    std::set<std::pair<T, long>> active;
     std::vector<int> status(num_nodes, UNSEEN);
     std::vector<T> dist(num_nodes, INF);
     std::vector<long> parents(num_nodes);
@@ -35,7 +35,7 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
     // Initialise all neighbours of start node
     for (auto const& neighbour : graph._nodes[start])
     {
-        active.push_back(neighbour);
+        active.insert(std::pair<T, long>(dist[neighbour], neighbour));
         status[neighbour] = PROCESSING;
         dist[neighbour] = graph._weights[start][neighbour];
         parents[neighbour] = start;
@@ -43,24 +43,11 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
 
     while (active.size() > 0)
     {
-        long cheapest_ix = -1;
-        long cheapest_node = -1;
-        T cheapest_dist = INF;
-
         // Find cheapest active node
-        for (long i = 0; i < (long) active.size(); ++i)
-        {
-            long node = active[i];
-            if (dist[node] < cheapest_dist)
-            {
-                cheapest_ix = i;
-                cheapest_node = node;
-                cheapest_dist = dist[node];
-            }
-        }
+        std::pair<T, long> cheapest_pair = *active.begin();
+        long cheapest_node = cheapest_pair.second;
 
-        assert(cheapest_ix != -1);
-        active.erase(active.begin() + cheapest_ix);
+        active.erase(active.begin());
         status[cheapest_node] = DONE;
 
         // Check if neighbours of cheapest node has changed
@@ -72,11 +59,18 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
                              dist[cheapest_node];
                 if (new_dist < dist[node])
                 {
-                    dist[node] = new_dist;
                     parents[node] = cheapest_node;
-                    if (status[node] == UNSEEN)
-                        active.push_back(node);
+                    if (status[node] == PROCESSING)
+                    {
+                        auto it = std::find_if(active.begin(), active.end(),
+                            [&](const std::pair<T, long>& val) {
+                                return val.first == dist[node] &&
+                                       val.second == node; });
+                        active.erase(it);
+                    }
+                    active.insert(std::pair<T, long>(new_dist, node));
                     status[node] = PROCESSING;
+                    dist[node] = new_dist;
                 }
             }
         }
