@@ -4,6 +4,8 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#include <cassert>
+#include <limits>
 #include <vector>
 
 
@@ -18,7 +20,8 @@ struct Graph
 
 
 template<typename T>
-std::pair<std::vector<long>, std::vector<T>> shortest_path(Graph<T>&, const long);
+std::pair<std::vector<long>, std::vector<T>>
+shortest_path(const Graph<T>&, const long);
 
 #include "graph.cpp"
 
