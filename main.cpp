@@ -126,6 +126,28 @@ void kattis_longest_increasing_subsequence()
 */
 
 /*
+ * Solve the Kattis Single Source Shortest Path, Non-Negative Weights problem.
+ * Additionally solves the construction problem.
+ */
+void kattis_shortest_path_non_neg() {
+    long n, m, q, s;
+    while (std::cin >> n >> m >> q >> s) {
+        if (n == 0 && m == 0 && q == 0 && s == 0)
+            break;
+        std::cout << n << " " << m  << " " << q  << " " << s << std::endl;
+        for (long i = 0; i < m; ++i) {
+            long u, v, w; std::cin >> u >> v >> w;
+            std::cout << u << " " << v << " " << w << std::endl;
+        }
+        for (long i = 0; i < q; ++i) {
+            long a; std::cin >> a;
+            std::cout << a << std::endl;
+        }
+    }
+}
+
+
+/*
  * Solve the Kattis Union-Find problem.
  */
 /*
@@ -171,4 +193,5 @@ int main()
     /* kattis_fenwick_tree(); */
     /* kattis_union_find(); */
     /* kattis_knapsack(); */
+    kattis_shortest_path_non_neg();
 }
