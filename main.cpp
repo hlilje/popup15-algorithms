@@ -142,8 +142,11 @@ void kattis_shortest_path_non_neg()
         for (long i = 0; i < m; ++i)
         {
             long u, v, w; std::cin >> u >> v >> w;
-            graph._nodes[u].push_back(v);
-            graph._weights[u][v] = w;
+            // Handle possibly double edges of greater weight
+            if (graph._weights[u][v] == std::numeric_limits<long>::max())
+                graph._nodes[u].push_back(v);
+            if (w < graph._weights[u][v])
+                graph._weights[u][v] = w;
 
         }
         std::pair<std::vector<long>, std::vector<long>> parents_dist =
