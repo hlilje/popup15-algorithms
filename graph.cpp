@@ -32,12 +32,12 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
 {
     auto num_nodes = graph._nodes.size();
     std::set<std::pair<T, long>, PairComp<T>> active;
-    std::vector<int> status(num_nodes, UNSEEN);
+    /* std::vector<int> status(num_nodes, UNSEEN); */
     std::vector<T> dist(num_nodes, INF);
     std::vector<long> parents(num_nodes);
 
     dist[start] = 0; // Not generic
-    status[start] = DONE;
+    /* status[start] = DONE; */
 
     active.insert(std::pair<T, long>(dist[start], start));
 
@@ -47,7 +47,7 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
         long cheapest_node = active.begin()->second;
 
         active.erase(active.begin());
-        status[cheapest_node] = DONE;
+        /* status[cheapest_node] = DONE; */
 
         // Check if neighbours of cheapest node has changed
         for (auto const& node : graph._nodes[cheapest_node])
@@ -58,10 +58,10 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
             if (new_dist < dist[node])
             {
                 parents[node] = cheapest_node;
-                if (status[node] == PROCESSING)
-                    active.erase(std::pair<T, long>(dist[node], node));
+                /* if (status[node] == PROCESSING) */
+                active.erase(std::pair<T, long>(dist[node], node));
                 active.insert(std::pair<T, long>(new_dist, node));
-                status[node] = PROCESSING;
+                /* status[node] = PROCESSING; */
                 dist[node] = new_dist;
             }
         }
