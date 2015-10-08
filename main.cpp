@@ -4,8 +4,8 @@
 #include "algorithms.hpp"
 #include "fenwick.hpp"
 #include "interval.hpp"
-#include "set.hpp"
 #include "test_generator.hpp"
+#include "union_find.hpp"
 #include <cassert>
 #include <iostream>
 #include <vector>
