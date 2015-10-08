@@ -1,11 +1,12 @@
-/**
+/*
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 #pragma once
+
 #include <iostream>
 
 
-/**
+/*
  * Generate a test case for the Fenwick Kattis problem.
  * The test will be printed to stdout.
  *
@@ -13,7 +14,7 @@
  */
 void generate_fenwick_test(const long long int);
 
-/**
+/*
  * Generate a test case for the Union-Find Kattis problem.
  * The test will be printed to stdout.
  *

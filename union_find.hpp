@@ -1,4 +1,4 @@
-/**
+/*
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 #pragma once
@@ -17,7 +17,7 @@ struct set
 };
 
 
-/**
+/*
  * Find parent recursively using DFS.
  *
  * @param:  The set to start searching from.
@@ -25,7 +25,7 @@ struct set
  */
 set* find(set*);
 
-/**
+/*
  * Check if the given sets are connected.
  *
  * @param x: The first set to compare.
@@ -34,7 +34,7 @@ set* find(set*);
  */
 bool same(set*, set*);
 
-/**
+/*
  * Union sets by attaching the root of one to the root of the other.
  *
  * @param x: The first set to union.

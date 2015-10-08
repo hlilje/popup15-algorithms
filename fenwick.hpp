@@ -1,10 +1,10 @@
-/**
+/*
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 #pragma once
 
 
-/**
+/*
  * Represents a Fenwick/BIT.
  */
 struct fenwick
@@ -14,14 +14,14 @@ struct fenwick
         long long int* _tree;      // Tree container
 
     public:
-        /**
+        /*
          * @param input_size: The size of the tree.
          */
         fenwick(const long long int);
 
         ~fenwick();
 
-        /**
+        /*
          * Get the tree sum up to end (exclusive).
          *
          * @param end: Index for the end of the prefix to sum.
@@ -29,7 +29,7 @@ struct fenwick
          */
         long long int sum(long long int);
 
-        /**
+        /*
          * Increment the tree at the given position with the given value.
          *
          * @param i:     The index of node to change.

@@ -1,19 +1,21 @@
-/**
+/*
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
-#include "algorithms.hpp"
-#include "fenwick.hpp"
-#include "interval.hpp"
-#include "test_generator.hpp"
-#include "union_find.hpp"
-#include <cassert>
+/* #include "fenwick.hpp" */
+/* #include "interval_cover.hpp" */
+/* #include "knapsack.hpp" */
+/* #include "lis.hpp" */
+/* #include "test_generator.hpp" */
+/* #include "union_find.hpp" */
+/* #include <cassert> */
 #include <iostream>
-#include <vector>
+/* #include <vector> */
 
 
-/**
+/*
  * Solve the Kattis Fenwick Tree problem.
  */
+/*
 void kattis_fenwick_tree()
 {
     long long int N, Q; std::cin >> N >> Q;
@@ -35,10 +37,12 @@ void kattis_fenwick_tree()
         }
     }
 }
+*/
 
-/**
+/*
  * Solve the Kattis Interval Cover problem.
  */
+/*
 void kattis_interval_cover()
 {
     long double A, B;
@@ -67,10 +71,12 @@ void kattis_interval_cover()
         }
     }
 }
+*/
 
-/**
+/*
  * Solve the Kattis Knapsack problem.
  */
+/*
 void kattis_knapsack()
 {
     double C_dbl; // Capacity
@@ -78,7 +84,7 @@ void kattis_knapsack()
     while (std::cin >> C_dbl >> n)
     {
         long int C = (long int) C_dbl; // Weights are long integers
-        int_pairs value_weight(n);
+        std::vector<std::pair<long int, long int>> value_weight(n);
         for (long int i = 0; i < n; ++i)
         {
             long int value, weight; std::cin >> value >> weight;
@@ -95,10 +101,12 @@ void kattis_knapsack()
         std::cout << std::endl;
     }
 }
+*/
 
-/**
+/*
  * Solve the Kattis Longest Increasing Subsequence problem.
  */
+/*
 void kattis_longest_increasing_subsequence()
 {
     long int n;
@@ -115,10 +123,12 @@ void kattis_longest_increasing_subsequence()
         std::cout << std::endl;
     }
 }
+*/
 
-/**
+/*
  * Solve the Kattis Union-Find problem.
  */
+/*
 void kattis_union_find()
 {
     long int N, Q; std::cin >> N >> Q;
@@ -149,15 +159,16 @@ void kattis_union_find()
     for (long int i = 0; i < N; ++i)
         delete sets[i];
 }
+*/
 
 int main()
 {
     // Turn off sync with C I/O for speed
-    std::iostream::sync_with_stdio(false);
+    std::cin.sync_with_stdio(false);
 
     /* kattis_interval_cover(); */
     /* kattis_longest_increasing_subsequence(); */
     /* kattis_fenwick_tree(); */
     /* kattis_union_find(); */
-    kattis_knapsack();
+    /* kattis_knapsack(); */
 }

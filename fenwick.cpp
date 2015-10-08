@@ -1,4 +1,4 @@
-/**
+/*
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 #include "fenwick.hpp"
