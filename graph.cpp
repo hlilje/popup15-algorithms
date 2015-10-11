@@ -8,7 +8,7 @@
 
 #define INF std::numeric_limits<T>::max()
 enum {UNSEEN, PROCESSING, DONE};
-typedef std::vector<long> long_vec;
+using long_vec = std::vector<long>;
 template<typename T>
 using t_vec = std::vector<T>;
 
@@ -22,7 +22,12 @@ template<typename T>
 bool PairComp<T>::operator()(const std::pair<T, long>& a,
                              const std::pair<T, long>& b)
 {
-    return a.first < b.first;
+    if (a.first < b.first)
+        return true;
+    else if ((a.second == b.second) && (a.first < b.first))
+        return true;
+    else
+        return false;
 }
 
 
