@@ -11,14 +11,32 @@
 
 
 template<typename T>
+struct Edge
+{
+    const T weight;
+    const long from, to;
+    const long first_time;
+    const long between_time;
+
+    /*
+     * @param weight:       Edge weight.
+     * @param from, to:     Nodes connected.
+     * @param first_time:   Edge becomes available.
+     * @param between_time: Time in between.
+     */
+    Edge(const T, const long, const long, const long, const long);
+};
+
+template<typename T>
 struct Graph
 {
-    Graph(const std::size_t);
+    // Vector to lists of out edges, 0-based index = node
+    std::vector<std::vector<Edge<T>*>> out_edges;
 
-    // _nodes[i][j] = neighbour j of i
-    std::vector<std::vector<long>> _nodes;
-    // _nodes[i][j] = weight for edge i -> j
-    std::vector<std::vector<T>> _weights;
+    /*
+     * @param num_nodes: The number of nodes in the graph.
+     */
+    Graph(const std::size_t);
 };
 
 template<typename T>
@@ -46,16 +64,13 @@ shortest_path(const Graph<T>&, const long);
  * Dijkstra's algorithm, where edges switch between available and
  * unavailable.
  *
- * @param graph:               Graph struct.
- * @param start_times:         Start times for train departures.
- * @param departure_intervals: Intervals when trains depature.
- * @param start:               Index for start node.
- * @return:                    A pair of parent/distances vectors.
+ * @param graph: Graph struct.
+ * @param start: Index for start node.
+ * @return:      A pair of parent/distances vectors.
  */
 template<typename T>
 std::pair<std::vector<long>, std::vector<T>>
-shortest_path_time(const Graph<T>&, const std::vector<std::vector<long>>&,
-                   const std::vector<std::vector<long>>&, const long);
+shortest_path_time(const Graph<T>&, const long);
 
 #include "graph.cpp"
 

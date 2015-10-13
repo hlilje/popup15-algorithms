@@ -8,15 +8,21 @@
 
 #define INF std::numeric_limits<T>::max()
 using long_vec = std::vector<long>;
-using long_mat = std::vector<std::vector<long>>;
+template<typename T>
+using edge_vec = std::vector<Edge<T>*>;
 template<typename T>
 using t_vec = std::vector<T>;
 
 
 template<typename T>
+Edge<T>::Edge(const T weight, const long from, const long to,
+     const long first_time, const long between_time) :
+    weight(weight), from(from), to(to),
+    first_time(first_time), between_time(between_time) { }
+
+template<typename T>
 Graph<T>::Graph(const std::size_t num_nodes) :
-    _nodes(std::vector<long_vec>(num_nodes)),
-    _weights(std::vector<t_vec<T>>(num_nodes, t_vec<T>(num_nodes, INF))) { }
+    out_edges(std::vector<edge_vec<T>>(num_nodes)) {}
 
 template<typename T>
 bool PairComp<T>::operator()(const std::pair<T, long>& a,
@@ -30,7 +36,7 @@ template<typename T>
 std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
                                             const long start)
 {
-    auto num_nodes = graph._nodes.size();
+    auto num_nodes = graph.out_edges.size();
     std::priority_queue<std::pair<T, long>, std::vector<std::pair<T, long>>,
                         PairComp<T>> active;
     std::vector<T> dist(num_nodes, INF);
@@ -47,16 +53,16 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
         active.pop();
 
         // Check if neighbours of cheapest node has changed
-        for (const auto& node : graph._nodes[cheapest_node])
+        for (const auto& edge : graph.out_edges[cheapest_node])
         {
             // Distance through cheapest node
-            T new_dist = graph._weights[cheapest_node][node] +
-                         dist[cheapest_node];
-            if (new_dist < dist[node])
+            long next_node = edge->to;
+            T new_dist = edge->weight + dist[cheapest_node];
+            if (new_dist < dist[next_node])
             {
-                parents[node] = cheapest_node;
-                active.emplace(std::pair<T, long>(dist[node], node));
-                dist[node] = new_dist;
+                parents[next_node] = cheapest_node;
+                active.emplace(std::pair<T, long>(dist[next_node], next_node));
+                dist[next_node] = new_dist;
             }
         }
     }
@@ -65,13 +71,10 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
 }
 
 template<typename T>
-std::pair<long_vec, t_vec<T>> shortest_path_time(
-        const Graph<T>& graph,
-        const long_mat& start_times,
-        const long_mat& departure_intervals,
-        const long start)
+std::pair<long_vec, t_vec<T>> shortest_path_time(const Graph<T>& graph,
+                                                 const long start)
 {
-    auto num_nodes = graph._nodes.size();
+    auto num_nodes = graph.out_edges.size();
     std::priority_queue<std::pair<T, long>, std::vector<std::pair<T, long>>,
                         PairComp<T>> active;
     std::vector<T> time(num_nodes, INF);
@@ -88,10 +91,11 @@ std::pair<long_vec, t_vec<T>> shortest_path_time(
         active.pop();
 
         // Check if neighbours of cheapest node has changed
-        for (const auto& next_node : graph._nodes[cheapest_node])
+        for (const auto& edge : graph.out_edges[cheapest_node])
         {
-            long t_0          = start_times[cheapest_node][next_node];
-            long P            = departure_intervals[cheapest_node][next_node];
+            long next_node    = edge->to;
+            long t_0          = edge->first_time;
+            long P            = edge->between_time;
             long arrival_time = time[cheapest_node];
             long train_time   = arrival_time - t_0;
             long penalty      = 0;
@@ -113,8 +117,7 @@ std::pair<long_vec, t_vec<T>> shortest_path_time(
                 penalty = -train_time;
             }
             // Distance through cheapest node
-            T new_time = graph._weights[cheapest_node][next_node] +
-                         arrival_time + penalty;
+            T new_time = edge->weight + arrival_time + penalty;
             if (new_time < time[next_node])
             {
                 parents[next_node] = cheapest_node;

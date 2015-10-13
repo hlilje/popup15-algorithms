@@ -142,12 +142,10 @@ void kattis_shortest_path_non_neg()
         Graph<long> graph(n);
         for (long i = 0; i < m; ++i)
         {
+            // Assume simple graph
             long u, v, w; std::cin >> u >> v >> w;
-            // Handle possibly double edges of greater weight
-            if (graph._weights[u][v] == std::numeric_limits<long>::max())
-                graph._nodes[u].push_back(v);
-            if (w < graph._weights[u][v])
-                graph._weights[u][v] = w;
+            Edge<long>* edge = new Edge<long>(w, u, v, 0, 0);
+            graph.out_edges[u].push_back(edge);
         }
         std::pair<std::vector<long>, std::vector<long>> parents_dist =
                 shortest_path(graph, s);
@@ -161,6 +159,9 @@ void kattis_shortest_path_non_neg()
             else
                 std::cout << "Impossible" << std::endl;
         }
+        for (const auto& edge_list : graph.out_edges)
+            for (const auto& edge : edge_list)
+                delete edge;
         std::cout << std::endl;
     }
 }
@@ -183,14 +184,13 @@ void kattis_shortest_path_time_table()
         std::vector<std::vector<long>> departure_intervals(n, std::vector<long>(n));
         for (long i = 0; i < m; ++i)
         {
+            // Assume simple graph
             long u, v, t_0, P, d; std::cin >> u >> v >> t_0 >> P >> d;
-            graph._nodes[u].push_back(v);
-            graph._weights[u][v] = d;
-            start_times[u][v] = t_0;
-            departure_intervals[u][v] = P;
+            Edge<long>* edge = new Edge<long>(d, u, v, t_0, P);
+            graph.out_edges[u].push_back(edge);
         }
         std::pair<std::vector<long>, std::vector<long>> parents_dist =
-                shortest_path_time(graph, start_times, departure_intervals, s);
+                shortest_path_time(graph, s);
         std::vector<long> dist = parents_dist.second;
         for (long i = 0; i < q; ++i)
         {
@@ -201,6 +201,9 @@ void kattis_shortest_path_time_table()
             else
                 std::cout << "Impossible" << std::endl;
         }
+        for (const auto& edge_list : graph.out_edges)
+            for (const auto& edge : edge_list)
+                delete edge;
         std::cout << std::endl;
     }
 }
