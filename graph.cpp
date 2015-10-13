@@ -74,12 +74,12 @@ std::pair<long_vec, t_vec<T>> shortest_path_time(
     auto num_nodes = graph._nodes.size();
     std::priority_queue<std::pair<T, long>, std::vector<std::pair<T, long>>,
                         PairComp<T>> active;
-    std::vector<T> dist(num_nodes, INF);
+    std::vector<T> time(num_nodes, INF);
     std::vector<long> parents(num_nodes);
 
-    dist[start] = 0; // Not generic
+    time[start] = 0; // Not generic
 
-    active.emplace(std::pair<T, long>(dist[start], start));
+    active.emplace(std::pair<T, long>(time[start], start));
 
     while (!active.empty())
     {
@@ -88,21 +88,43 @@ std::pair<long_vec, t_vec<T>> shortest_path_time(
         active.pop();
 
         // Check if neighbours of cheapest node has changed
-        for (const auto& node : graph._nodes[cheapest_node])
+        for (const auto& next_node : graph._nodes[cheapest_node])
         {
-            // Distance through cheapest node
-            T new_dist = graph._weights[cheapest_node][node] +
-                         dist[cheapest_node];
-            if (new_dist < dist[node])
+            long t_0          = start_times[cheapest_node][next_node];
+            long P            = departure_intervals[cheapest_node][next_node];
+            long arrival_time = time[cheapest_node];
+            long train_time   = arrival_time - t_0;
+            long penalty      = 0;
+            if (train_time >= 0) // First train has left
             {
-                parents[node] = cheapest_node;
-                active.emplace(std::pair<T, long>(dist[node], node));
-                dist[node] = new_dist;
+                if (P == 0) // Only one train departure
+                {
+                    penalty = INF;
+                }
+                else // Find next departure
+                {
+                    long t = train_time / P;     // Number of departures
+                    penalty = (t + 1) * P + t_0; // Next departure
+                    penalty -= arrival_time;
+                }
+            }
+            else // Take first departure
+            {
+                penalty = -train_time;
+            }
+            // Distance through cheapest node
+            T new_time = graph._weights[cheapest_node][next_node] +
+                         arrival_time + penalty;
+            if (new_time < time[next_node])
+            {
+                parents[next_node] = cheapest_node;
+                time[next_node] = new_time;
+                active.emplace(std::pair<T, long>(new_time, next_node));
             }
         }
     }
 
-    return std::pair<long_vec, t_vec<T>>(parents, dist);
+    return std::pair<long_vec, t_vec<T>>(parents, time);
 }
 
 #endif
