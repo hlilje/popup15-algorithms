@@ -41,6 +41,22 @@ template<typename T>
 std::pair<std::vector<long>, std::vector<T>>
 shortest_path(const Graph<T>&, const long);
 
+/*
+ * Find the shortest paths between the start node and all other nodes using
+ * Dijkstra's algorithm, where edges switch between available and
+ * unavailable.
+ *
+ * @param graph:               Graph struct.
+ * @param start_times:         Start times for train departures.
+ * @param departure_intervals: Intervals when trains depature.
+ * @param start:               Index for start node.
+ * @return:                    A pair of parent/distances vectors.
+ */
+template<typename T>
+std::pair<std::vector<long>, std::vector<T>>
+shortest_path_time(const Graph<T>&, const std::vector<std::vector<long>>&,
+                   const std::vector<std::vector<long>>&, const long);
+
 #include "graph.cpp"
 
 #endif

@@ -165,6 +165,45 @@ void kattis_shortest_path_non_neg()
 }
 
 /*
+ * Solve the Kattis Single Source Shortest Path, Time Table problem.
+ * Additionally solves the construction problem.
+ */
+void kattis_shortest_path_time_table()
+{
+    long n, m, q, s;
+    while (std::cin >> n >> m >> q >> s)
+    {
+        if (n == 0 && m == 0 && q == 0 && s == 0)
+            break;
+
+        Graph<long> graph(n);
+        std::vector<std::vector<long>> start_times(n, std::vector<long>(n));
+        std::vector<std::vector<long>> departure_intervals(n, std::vector<long>(n));
+        for (long i = 0; i < m; ++i)
+        {
+            long u, v, t_0, P, d; std::cin >> u >> v >> t_0 >> P >> d;
+            graph._nodes[u].push_back(v);
+            graph._weights[u][v] = d;
+            start_times[u][v] = t_0;
+            departure_intervals[u][v] = P;
+        }
+        std::pair<std::vector<long>, std::vector<long>> parents_dist =
+                shortest_path_time(graph, start_times, departure_intervals, s);
+        std::vector<long> dist = parents_dist.second;
+        for (long i = 0; i < q; ++i)
+        {
+            long target; std::cin >> target;
+            long distance = dist[target];
+            if (distance != std::numeric_limits<long>::max())
+                std::cout << distance << std::endl;
+            else
+                std::cout << "Impossible" << std::endl;
+        }
+        std::cout << std::endl;
+    }
+}
+
+/*
  * Solve the Kattis Union-Find problem.
  */
 /*
