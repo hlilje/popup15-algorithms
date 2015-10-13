@@ -180,8 +180,6 @@ void kattis_shortest_path_time_table()
             break;
 
         Graph<long> graph(n);
-        std::vector<std::vector<long>> start_times(n, std::vector<long>(n));
-        std::vector<std::vector<long>> departure_intervals(n, std::vector<long>(n));
         for (long i = 0; i < m; ++i)
         {
             // Assume simple graph
