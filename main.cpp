@@ -147,7 +147,6 @@ void kattis_shortest_path_non_neg()
                 graph._nodes[u].push_back(v);
             if (w < graph._weights[u][v])
                 graph._weights[u][v] = w;
-
         }
         std::pair<std::vector<long>, std::vector<long>> parents_dist =
                 shortest_path(graph, s);

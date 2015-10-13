@@ -7,8 +7,7 @@
 #include "graph.hpp"
 
 #define INF std::numeric_limits<T>::max()
-enum {UNSEEN, PROCESSING, DONE};
-typedef std::vector<long> long_vec;
+using long_vec = std::vector<long>;
 template<typename T>
 using t_vec = std::vector<T>;
 
@@ -22,7 +21,12 @@ template<typename T>
 bool PairComp<T>::operator()(const std::pair<T, long>& a,
                              const std::pair<T, long>& b)
 {
-    return a.first < b.first;
+    if (a.first < b.first)
+        return true;
+    else if ((a.second == b.second) && (a.first < b.first))
+        return true;
+    else
+        return false;
 }
 
 
@@ -31,26 +35,23 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
                                             const long start)
 {
     auto num_nodes = graph._nodes.size();
-    std::set<std::pair<T, long>, PairComp<T>> active;
-    /* std::vector<int> status(num_nodes, UNSEEN); */
+    std::priority_queue<std::pair<T, long>, std::vector<std::pair<T, long>>,
+                        PairComp<T>> active;
     std::vector<T> dist(num_nodes, INF);
     std::vector<long> parents(num_nodes);
 
     dist[start] = 0; // Not generic
-    /* status[start] = DONE; */
 
-    active.insert(std::pair<T, long>(dist[start], start));
+    active.emplace(std::pair<T, long>(dist[start], start));
 
     while (!active.empty())
     {
         // Find cheapest active node
-        long cheapest_node = active.begin()->second;
-
-        active.erase(active.begin());
-        /* status[cheapest_node] = DONE; */
+        long cheapest_node = active.top().second;
+        active.pop();
 
         // Check if neighbours of cheapest node has changed
-        for (auto const& node : graph._nodes[cheapest_node])
+        for (const auto& node : graph._nodes[cheapest_node])
         {
             // Distance through cheapest node
             T new_dist = graph._weights[cheapest_node][node] +
@@ -58,10 +59,7 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
             if (new_dist < dist[node])
             {
                 parents[node] = cheapest_node;
-                /* if (status[node] == PROCESSING) */
-                active.erase(std::pair<T, long>(dist[node], node));
-                active.insert(std::pair<T, long>(new_dist, node));
-                /* status[node] = PROCESSING; */
+                active.emplace(std::pair<T, long>(dist[node], node));
                 dist[node] = new_dist;
             }
         }
@@ -69,6 +67,5 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
 
     return std::pair<long_vec, t_vec<T>>(parents, dist);
 }
-
 
 #endif
