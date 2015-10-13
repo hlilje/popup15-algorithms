@@ -61,6 +61,7 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
             if (new_dist < dist[next_node])
             {
                 parents[next_node] = cheapest_node;
+                // NOTE: Incorrect, but faster on Kattis
                 active.emplace(std::pair<T, long>(dist[next_node], next_node));
                 dist[next_node] = new_dist;
             }
