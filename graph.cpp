@@ -21,12 +21,7 @@ template<typename T>
 bool PairComp<T>::operator()(const std::pair<T, long>& a,
                              const std::pair<T, long>& b)
 {
-    if (a.first < b.first)
-        return true;
-    else if ((a.second == b.second) && (a.first < b.first))
-        return true;
-    else
-        return false;
+    return a.first < b.first;
 }
 
 
