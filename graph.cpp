@@ -25,6 +25,13 @@ Graph<T>::Graph(const std::size_t num_nodes) :
     out_edges(std::vector<edge_vec<T>>(num_nodes)) {}
 
 template<typename T>
+bool LexoComp<T>::operator()(const Edge<T>* a,
+                             const Edge<T>* b)
+{
+    return a->from != b->from ? a->from < b->from : a->to < b->to;
+}
+
+template<typename T>
 bool PairComp<T>::operator()(const std::pair<T, long>& a,
                              const std::pair<T, long>& b)
 {
@@ -33,10 +40,12 @@ bool PairComp<T>::operator()(const std::pair<T, long>& a,
 
 
 template<typename T>
-std::set<Edge<T>*> mst(const Graph<T>& graph)
+std::set<Edge<T>*, LexoComp<T>> mst(const Graph<T>& graph)
 {
     auto num_nodes = graph.out_edges.size();
-    std::set<Edge<T>*> spanning_tree;
+
+    // Sorts edges in lexicographic order
+    std::set<Edge<T>*, LexoComp<T>> spanning_tree;
     std::vector<set*> sets(num_nodes);
 
     edge_vec<T> edges;

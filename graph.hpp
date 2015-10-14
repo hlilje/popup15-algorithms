@@ -43,6 +43,13 @@ struct Graph
 };
 
 template<typename T>
+struct LexoComp
+{
+    bool operator()(const Edge<T>* a,
+                    const Edge<T>* b);
+};
+
+template<typename T>
 struct PairComp
 {
     bool operator ()(const std::pair<T, long>&,
@@ -57,7 +64,7 @@ struct PairComp
  * @return     : All the edges of the minimum spanning tree.
  */
 template<typename T>
-std::set<Edge<T>*> mst(const Graph<T>&);
+std::set<Edge<T>*, LexoComp<T>> mst(const Graph<T>&);
 
 /*
  * Find the shortest paths between the start node and all other nodes using

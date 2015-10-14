@@ -8,6 +8,7 @@
 /* #include "lis.hpp" */
 /* #include "test_generator.hpp" */
 /* #include "union_find.hpp" */
+#include <algorithm>
 /* #include <cassert> */
 #include <iostream>
 /* #include <vector> */
@@ -145,7 +146,7 @@ void kattis_minimum_spanning_tree()
             graph.out_edges[u].push_back(edge);
         }
 
-        std::set<Edge<long>*> spanning_tree = mst(graph);
+        auto spanning_tree = mst(graph);
         if (spanning_tree.size() == 0)
         {
             std::cout << "Impossible" << std::endl;
@@ -157,7 +158,8 @@ void kattis_minimum_spanning_tree()
                 cost += edge->weight;
             std::cout << cost << std::endl;
 
-            // TODO: Output edges in lexicographic order
+            for (const auto& edge : spanning_tree)
+                std::cout << edge->from << " " << edge->to << std::endl;
         }
 
         for (const auto& edge_list : graph.out_edges)
