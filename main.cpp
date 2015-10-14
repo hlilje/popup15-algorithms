@@ -137,10 +137,32 @@ void kattis_minimum_spanning_tree()
         if (num_nodes == 0 && num_edges == 0)
             break;
 
-        for (long i = 0; i < num_nodes; ++i)
+        Graph<long> graph(num_nodes);
+        for (long i = 0; i < num_edges; ++i)
         {
             long u, v, weight; std::cin >> u >> v >> weight;
+            Edge<long>* edge = new Edge<long>(weight, u, v, 0, 0);
+            graph.out_edges[u].push_back(edge);
         }
+
+        std::set<Edge<long>*> spanning_tree = mst(graph);
+        if (spanning_tree.size() == 0)
+        {
+            std::cout << "Impossible" << std::endl;
+        }
+        else
+        {
+            long cost = 0;
+            for (const auto& edge : spanning_tree)
+                cost += edge->weight;
+            std::cout << cost << std::endl;
+
+            // TODO: Output edges in lexicographic order
+        }
+
+        for (const auto& edge_list : graph.out_edges)
+            for (const auto& edge : edge_list)
+                delete edge;
     }
 }
 

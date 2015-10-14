@@ -33,6 +33,42 @@ bool PairComp<T>::operator()(const std::pair<T, long>& a,
 
 
 template<typename T>
+std::set<Edge<T>*> mst(const Graph<T>& graph)
+{
+    auto num_nodes = graph.out_edges.size();
+    std::set<Edge<T>*> spanning_tree;
+    std::vector<set*> sets(num_nodes);
+
+    edge_vec<T> edges;
+    for (const auto& edge_list : graph.out_edges)
+        for (const auto& edge : edge_list)
+            edges.push_back(edge);
+
+    // Create a forest of singleton vertex components
+    for (long i = 0; i < (long) num_nodes; ++i)
+        sets[i] = new set(i);
+
+    // Sort edges after ascending lengths
+    std::sort(edges.begin(), edges.end(),
+              [](const Edge<T>* a, const Edge<T>* b)
+              { return a->weight < b->weight; });
+
+    for (const auto& edge : edges)
+    {
+        set* u = sets[edge->from];
+        set* v = sets[edge->to];
+        if (find(u) != find(v)) {
+            spanning_tree.insert(edge);
+            set_union(u, v);
+        }
+    }
+
+    for (const auto& set : sets) delete set;
+
+    return spanning_tree;
+}
+
+template<typename T>
 std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
                                             const long start)
 {

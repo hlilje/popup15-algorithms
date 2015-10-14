@@ -4,9 +4,12 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#include "union_find.hpp"
+#include <algorithm>
 #include <iostream>
 #include <limits>
 #include <queue>
+#include <set>
 #include <vector>
 
 
@@ -46,6 +49,15 @@ struct PairComp
                      const std::pair<T, long>&);
 };
 
+
+/*
+ * Find the minimum spanning tree of the given graph.
+ *
+ * @param graph: The graph to find the tree for.
+ * @return     : All the edges of the minimum spanning tree.
+ */
+template<typename T>
+std::set<Edge<T>*> mst(const Graph<T>&);
 
 /*
  * Find the shortest paths between the start node and all other nodes using
