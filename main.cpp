@@ -154,7 +154,7 @@ void kattis_shortest_path_non_neg()
         {
             long target; std::cin >> target;
             long distance = dist[target];
-            if (distance != std::numeric_limits<long>::max())
+            if (distance != std::numeric_limits<long>::max() / 100)
                 std::cout << distance << std::endl;
             else
                 std::cout << "Impossible" << std::endl;
@@ -194,7 +194,7 @@ void kattis_shortest_path_time_table()
         {
             long target; std::cin >> target;
             long distance = dist[target];
-            if (distance != std::numeric_limits<long>::max())
+            if (distance != std::numeric_limits<long>::max() / 100)
                 std::cout << distance << std::endl;
             else
                 std::cout << "Impossible" << std::endl;

@@ -6,7 +6,7 @@
 
 #include "graph.hpp"
 
-#define INF std::numeric_limits<T>::max()
+#define INF std::numeric_limits<T>::max() / 100
 using long_vec = std::vector<long>;
 template<typename T>
 using edge_vec = std::vector<Edge<T>*>;
@@ -16,7 +16,7 @@ using t_vec = std::vector<T>;
 
 template<typename T>
 Edge<T>::Edge(const T weight, const long from, const long to,
-     const long first_time, const long between_time) :
+              const long first_time, const long between_time) :
     weight(weight), from(from), to(to),
     first_time(first_time), between_time(between_time) { }
 
@@ -100,7 +100,7 @@ std::pair<long_vec, t_vec<T>> shortest_path_time(const Graph<T>& graph,
             long arrival_time = time[cheapest_node];
             long train_time   = arrival_time - t_0;
             long penalty      = 0;
-            if (train_time >= 0) // First train has left
+            if (train_time > 0) // First train has left
             {
                 if (P == 0) // Only one train departure
                 {
@@ -119,6 +119,8 @@ std::pair<long_vec, t_vec<T>> shortest_path_time(const Graph<T>& graph,
             }
             // Distance through cheapest node
             T new_time = edge->weight + arrival_time + penalty;
+            // For comparison
+            if (new_time > INF) new_time = INF;
             if (new_time < time[next_node])
             {
                 parents[next_node] = cheapest_node;
