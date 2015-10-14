@@ -127,6 +127,24 @@ void kattis_longest_increasing_subsequence()
 */
 
 /*
+ * Solve the Kattis Minimum Spanning tree problen.
+ */
+void kattis_minimum_spanning_tree()
+{
+    long num_nodes, num_edges;
+    while (std::cin >> num_nodes >> num_edges)
+    {
+        if (num_nodes == 0 && num_edges == 0)
+            break;
+
+        for (long i = 0; i < num_nodes; ++i)
+        {
+            long u, v, weight; std::cin >> u >> v >> weight;
+        }
+    }
+}
+
+/*
  * Solve the Kattis Single Source Shortest Path, Non-Negative Weights problem.
  * Additionally solves the construction problem.
  */
@@ -253,5 +271,6 @@ int main()
     /* kattis_union_find(); */
     /* kattis_knapsack(); */
     /* kattis_shortest_path_non_neg(); */
-    kattis_shortest_path_time_table();
+    /* kattis_shortest_path_time_table(); */
+    kattis_minimum_spanning_tree();
 }
