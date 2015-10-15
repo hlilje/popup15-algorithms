@@ -135,6 +135,7 @@ std::pair<long_vec, t_vec<T>> shortest_path_neg(const Graph<T>& graph,
             {
                 long to = edge->to;
                 T new_dist = dists[from] + edge->weight;
+                if (dists[from] == INF) new_dist = INF;
                 if (dists[to] > new_dist)
                 {
                     dists[to] = new_dist;
@@ -151,6 +152,7 @@ std::pair<long_vec, t_vec<T>> shortest_path_neg(const Graph<T>& graph,
         {
             long to = edge->to;
             T new_dist = dists[from] + edge->weight;
+            if (dists[from] == INF) new_dist = INF;
             if (dists[to] > new_dist)
             {
                 dists[to] = NEG_INF;
