@@ -225,26 +225,27 @@ t_vec<t_vec<T>> shortest_path_all_pairs(const Graph<T>& graph)
     // negative loops
     for (long start = 0; start < (long) num_nodes; ++start)
     {
+        t_vec<T> dist = dists[start];
         std::vector<bool> seen(num_nodes, false);
         std::queue<long> nodes;
         nodes.push(start);
         while (!nodes.empty())
         {
-            long from = nodes.front(); nodes.pop();
-            if (dists[from][from] < 0)
-                dists[from][from] = NEG_INF;
-            for (const auto& edge : graph.out_edges[from])
+            long fromm = nodes.front(); nodes.pop();
+            if (dists[fromm][fromm] < 0) dist[fromm] = NEG_INF;
+            for (const auto& edge : graph.out_edges[fromm])
             {
-                long to = edge->to;
-                if (!seen[to])
+                long too = edge->to;
+                if (!seen[too])
                 {
-                    nodes.push(to);
-                    seen[to] = true;
-                    if (dists[from][from] == NEG_INF)
-                        dists[from][to] = NEG_INF;
+                    nodes.push(too);
+                    seen[too] = true;
+                    if (dist[fromm] == NEG_INF)
+                        dist[too] = NEG_INF;
                 }
             }
         }
+        dists[start] = dist;
     }
 
     return dists;
