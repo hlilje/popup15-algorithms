@@ -130,7 +130,6 @@ void kattis_longest_increasing_subsequence()
 /*
  * Solve the Kattis Minimum Spanning tree problen.
  */
-/*
 void kattis_minimum_spanning_tree()
 {
     long num_nodes, num_edges;
@@ -172,7 +171,6 @@ void kattis_minimum_spanning_tree()
                 delete edge;
     }
 }
-*/
 
 /*
  * Solve the Kattis Single Source Shortest Path, Non-Negative Weights problem.
@@ -256,6 +254,11 @@ void kattis_shortest_path_time_table()
 }
 */
 
+/*
+ * Solve the Kattis Single Source Shortest Path, Negative Weights problem.
+ * Additionally solves the construction problem.
+ */
+/*
 void kattis_shortest_path_neg()
 {
     long num_nodes, num_edges, num_queries, start_index;
@@ -293,7 +296,11 @@ void kattis_shortest_path_neg()
         std::cout << std::endl;
     }
 }
+*/
 
+/*
+ * Solve the Kattis All Pairs Shortest Path problem.
+ */
 void kattis_shortest_path_all_pairs()
 {
     long num_nodes, num_edges, num_queries;
@@ -381,5 +388,5 @@ int main()
     /* kattis_shortest_path_time_table(); */
     /* kattis_minimum_spanning_tree(); */
     /* kattis_shortest_path_neg(); */
-    kattist_shortest_dist_all_pairs();
+    kattis_shortest_path_all_pairs();
 }
