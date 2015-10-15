@@ -142,11 +142,12 @@ void kattis_minimum_spanning_tree()
         for (long i = 0; i < num_edges; ++i)
         {
             long u, v, weight; std::cin >> u >> v >> weight;
+            if (u > v) {
+                long temp = u;
+                u = v; v = temp;
+            }
             Edge<long>* edge = new Edge<long>(weight, u, v, 0, 0);
             graph.out_edges[u].push_back(edge);
-            // Undirected edges
-            edge = new Edge<long>(weight, v, u, 0, 0);
-            graph.out_edges[v].push_back(edge);
         }
 
         auto spanning_tree = mst(graph);
