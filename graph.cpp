@@ -188,6 +188,21 @@ std::pair<long_vec, t_vec<T>> shortest_path_neg(const Graph<T>& graph,
 }
 
 template<typename T>
+void cascade_neg_inf(const long from, const Graph<T>& graph,
+                     t_vec<t_vec<T>>& dists)
+{
+    for (const auto& edge : graph.out_edges[from])
+    {
+        long to = edge->to;
+        if (dists[from][to] != NEG_INF)
+        {
+            dists[from][to] = NEG_INF;
+            cascade_neg_inf(to, graph, dists);
+        }
+    }
+}
+
+template<typename T>
 t_vec<t_vec<T>> shortest_path_all_pairs(const Graph<T>& graph)
 {
     auto num_nodes = graph.out_edges.size();
@@ -222,6 +237,11 @@ t_vec<t_vec<T>> shortest_path_all_pairs(const Graph<T>& graph)
                     new_dist = INF;
                 else if (new_dist < dists[from][to])
                     dists[from][to] = new_dist;
+            }
+            if (dists[from][from] < 0)
+            {
+                cascade_neg_inf(from, graph, dists);
+                dists[from][from] = NEG_INF;
             }
         }
     }

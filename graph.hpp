@@ -91,6 +91,13 @@ std::pair<std::vector<long>, std::vector<T>>
 shortest_path_neg(const Graph<T>&, const long);
 
 /*
+ * Recursive helper function for `shortest_path_all_pairs` which
+ * sets all children to negative infinity.
+ */
+template<typename T>
+void cascade_neg_inf(const long, const Graph<T>&,
+                     std::vector<std::vector<T>>&);
+/*
  * Find the shortest paths between the start node and all other nodes using
  * Floyd-Warshall's algorithm.
  *
