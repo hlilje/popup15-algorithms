@@ -188,24 +188,22 @@ std::pair<long_vec, t_vec<T>> shortest_path_neg(const Graph<T>& graph,
 }
 
 template<typename T>
-std::pair<long_vec, t_vec<T>> shortest_path_all_pairs(const Graph<T>& graph,
-                                                const long start)
+t_vec<t_vec<T>> shortest_path_all_pairs(const Graph<T>& graph)
 {
     auto num_nodes = graph.out_edges.size();
-    t_vec<T> dists(num_nodes, INF);
-    long_vec parents(num_nodes, -1);
+    t_vec<t_vec<T>> dists(num_nodes, t_vec<T>(num_nodes, INF));
 
     for (long from = 0; from < (long) num_nodes; ++from)
     {
-	for (const auto& edge : graph.out_edges[from])
-            {
-                long to = edge->to;
-                dists[from][to] = edge->weight;		
-	    }
+        for (const auto& edge : graph.out_edges[from])
+        {
+            long to = edge->to;
+            dists[from][to] = edge->weight;
+        }
     }
     for (long from = 0; from < (long) num_nodes; ++from)
     {
-	dists[from][from] = 0;		
+        dists[from][from] = 0;
     }
 
     //setup done
@@ -214,35 +212,42 @@ std::pair<long_vec, t_vec<T>> shortest_path_all_pairs(const Graph<T>& graph,
     {
         for (long from = 0; from < (long) num_nodes; ++from) //for each source
         {
-	    for (long to = 0; to < (long) num_nodes; ++to) //for each destination
-		{
-		    dists[from][to] = std::min(dists[from][to], dists[from][k] + dists[k][to]); //keep old or update
-		}
+            for (long to = 0; to < (long) num_nodes; ++to) //for each destination
+            {
+                //keep old or update
+                dists[from][to] = std::min(dists[from][to],
+                                           dists[from][k] + dists[k][to]);
+            }
         }
     }
 
-    // // Mark all descendants of start that are also descendants of
-    // // negative loops
-    // std::vector<bool> seen(num_nodes, false);
-    // std::queue<long> nodes;
-    // nodes.push(start);
-    // while (!nodes.empty())
-    // {
-    //     long from = nodes.front(); nodes.pop();
-    //     for (const auto& edge : graph.out_edges[from])
-    //     {
-    //         long to = edge->to;
-    //         if (!seen[to])
-    //         {
-    //             nodes.push(to);
-    //             seen[to] = true;
-    //             if (dists[from] == NEG_INF)
-    //                 dists[to] = NEG_INF;
-    //         }
-    //     }
-    // }
+    // Mark all descendants of start that are also descendants of
+    // negative loops
+    for (long start = 0; start < (long) num_nodes; ++start)
+    {
+        std::vector<bool> seen(num_nodes, false);
+        std::queue<long> nodes;
+        nodes.push(start);
+        while (!nodes.empty())
+        {
+            long from = nodes.front(); nodes.pop();
+            if (dists[from][from] < 0)
+                dists[from][from] = NEG_INF;
+            for (const auto& edge : graph.out_edges[from])
+            {
+                long to = edge->to;
+                if (!seen[to])
+                {
+                    nodes.push(to);
+                    seen[to] = true;
+                    if (dists[from][from] == NEG_INF)
+                        dists[from][to] = NEG_INF;
+                }
+            }
+        }
+    }
 
-    return std::pair<long_vec, t_vec<T>>(parents, dists);
+    return dists;
 }
 
 template<typename T>

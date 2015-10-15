@@ -317,13 +317,11 @@ void kattis_shortest_path_all_pairs()
             Edge<long>* edge = new Edge<long>(w, u, v, 0, 0);
             graph.out_edges[u].push_back(edge);
         }
-        std::pair<std::vector<long>, std::vector<long>> parents_dist =
-                shortest_path_all_pairs(graph, start_index);
-        std::vector<long> dist = parents_dist.second;
+        auto dists = shortest_path_all_pairs(graph);
         for (long i = 0; i < num_queries; ++i)
         {
             long from, to; std::cin >> from >> to;
-            long distance = dist[from][to];
+            long distance = dists[from][to];
             if (distance == std::numeric_limits<long>::max() / 100)
                 std::cout << "Impossible" << std::endl;
             else if (distance == std::numeric_limits<long>::min() / 100)

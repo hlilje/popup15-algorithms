@@ -88,7 +88,17 @@ shortest_path(const Graph<T>&, const long);
  */
 template<typename T>
 std::pair<std::vector<long>, std::vector<T>>
-shortest_path_neg(const Graph<T>& graph, const long start);
+shortest_path_neg(const Graph<T>&, const long);
+
+/*
+ * Find the shortest paths between the start node and all other nodes using
+ * Floyd-Warshall's algorithm.
+ *
+ * @param graph: Graph struct.
+ * @return:      A distance matrix.
+ */
+template<typename T>
+std::vector<std::vector<T>> shortest_path_all_pairs(const Graph<T>&);
 
 /*
  * Find the shortest paths between the start node and all other nodes using
