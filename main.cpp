@@ -8,7 +8,7 @@
 /* #include "lis.hpp" */
 /* #include "test_generator.hpp" */
 /* #include "union_find.hpp" */
-#include <algorithm>
+/* #include <algorithm> */
 /* #include <cassert> */
 #include <iostream>
 /* #include <vector> */
@@ -130,6 +130,7 @@ void kattis_longest_increasing_subsequence()
 /*
  * Solve the Kattis Minimum Spanning tree problen.
  */
+/*
 void kattis_minimum_spanning_tree()
 {
     long num_nodes, num_edges;
@@ -171,6 +172,7 @@ void kattis_minimum_spanning_tree()
                 delete edge;
     }
 }
+*/
 
 /*
  * Solve the Kattis Single Source Shortest Path, Non-Negative Weights problem.
@@ -217,6 +219,7 @@ void kattis_shortest_path_non_neg()
  * Solve the Kattis Single Source Shortest Path, Time Table problem.
  * Additionally solves the construction problem.
  */
+/*
 void kattis_shortest_path_time_table()
 {
     long n, m, q, s;
@@ -251,17 +254,19 @@ void kattis_shortest_path_time_table()
         std::cout << std::endl;
     }
 }
+*/
 
 void kattis_shortest_path_neg()
 {
-    long n, m, q, s;
-    while (std::cin >> n >> m >> q >> s)
+    long num_nodes, num_edges, num_queries, start_index;
+    while (std::cin >> num_nodes >> num_edges >> num_queries >> start_index)
     {
-        if (n == 0 && m == 0 && q == 0 && s == 0)
+        if (num_nodes == 0 && num_edges == 0 && num_queries == 0 &&
+            start_index == 0)
             break;
 
-        Graph<long> graph(n);
-        for (long i = 0; i < m; ++i)
+        Graph<long> graph(num_nodes);
+        for (long i = 0; i < num_edges; ++i)
         {
             // Assume simple graph
             long u, v, w; std::cin >> u >> v >> w;
@@ -269,16 +274,18 @@ void kattis_shortest_path_neg()
             graph.out_edges[u].push_back(edge);
         }
         std::pair<std::vector<long>, std::vector<long>> parents_dist =
-                shortest_path_time(graph, s);
+                shortest_path_neg(graph, start_index);
         std::vector<long> dist = parents_dist.second;
-        for (long i = 0; i < q; ++i)
+        for (long i = 0; i < num_queries; ++i)
         {
             long target; std::cin >> target;
             long distance = dist[target];
-            if (distance != std::numeric_limits<long>::max() / 100)
-                std::cout << distance << std::endl;
-            else
+            if (distance == std::numeric_limits<long>::max() / 100)
                 std::cout << "Impossible" << std::endl;
+            else if (distance == std::numeric_limits<long>::min() / 100)
+                std::cout << "-Infinity" << std::endl;
+            else
+                std::cout << distance << std::endl;
         }
         for (const auto& edge_list : graph.out_edges)
             for (const auto& edge : edge_list)
@@ -336,5 +343,5 @@ int main()
     /* kattis_shortest_path_non_neg(); */
     /*kattis_shortest_path_time_table(); */
     /* kattis_minimum_spanning_tree(); */
-    
+    kattis_shortest_path_neg();
 }

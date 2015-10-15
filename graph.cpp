@@ -7,6 +7,7 @@
 #include "graph.hpp"
 
 #define INF std::numeric_limits<T>::max() / 100
+#define NEG_INF std::numeric_limits<T>::min() / 100
 using long_vec = std::vector<long>;
 template<typename T>
 using edge_vec = std::vector<Edge<T>*>;
@@ -114,6 +115,51 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
     }
 
     return std::pair<long_vec, t_vec<T>>(parents, dist);
+}
+
+template<typename T>
+std::pair<long_vec, t_vec<T>> shortest_path_neg(const Graph<T>& graph,
+                                                const long start)
+{
+    auto num_nodes = graph.out_edges.size();
+    t_vec<T> dists(num_nodes, INF);
+    long_vec parents(num_nodes, -1);
+    dists[start] = 0; // Not generic
+
+    // Relax edges repeatedly
+    for (long i = 0; i < (long) num_nodes - 1; ++i)
+    {
+        for (long from = 0; from < (long) num_nodes; ++from)
+        {
+            for (const auto& edge : graph.out_edges[from])
+            {
+                long to = edge->to;
+                T new_dist = dists[from] + edge->weight;
+                if (dists[to] > new_dist)
+                {
+                    dists[to] = new_dist;
+                    parents[to] = from;
+                }
+            }
+        }
+    }
+
+    // Still updatable => descendant of negative loop
+    for (long from = 0; from < (long) num_nodes; ++from)
+    {
+        for (const auto& edge : graph.out_edges[from])
+        {
+            long to = edge->to;
+            T new_dist = dists[from] + edge->weight;
+            if (dists[to] > new_dist)
+            {
+                dists[to] = NEG_INF;
+                parents[to] = from;
+            }
+        }
+    }
+
+    return std::pair<long_vec, t_vec<T>>(parents, dists);
 }
 
 template<typename T>

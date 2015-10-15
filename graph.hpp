@@ -80,6 +80,18 @@ shortest_path(const Graph<T>&, const long);
 
 /*
  * Find the shortest paths between the start node and all other nodes using
+ * Bellman-Ford's algorithm.
+ *
+ * @param graph: Graph struct.
+ * @param start: 0-based index for start node.
+ * @return:      A pair of parent/distances vectors.
+ */
+template<typename T>
+std::pair<std::vector<long>, std::vector<T>>
+shortest_path_neg(const Graph<T>& graph, const long start);
+
+/*
+ * Find the shortest paths between the start node and all other nodes using
  * Dijkstra's algorithm, where edges switch between available and
  * unavailable.
  *
