@@ -294,6 +294,43 @@ void kattis_shortest_path_neg()
     }
 }
 
+void kattis_shortest_path_all_pairs()
+{
+    long num_nodes, num_edges, num_queries;
+    while (std::cin >> num_nodes >> num_edges >> num_queries)
+    {
+        if (num_nodes == 0 && num_edges == 0 && num_queries == 0)
+            break;
+
+        Graph<long> graph(num_nodes);
+        for (long i = 0; i < num_edges; ++i)
+        {
+            // Assume simple graph
+            long u, v, w; std::cin >> u >> v >> w;
+            Edge<long>* edge = new Edge<long>(w, u, v, 0, 0);
+            graph.out_edges[u].push_back(edge);
+        }
+        std::pair<std::vector<long>, std::vector<long>> parents_dist =
+                shortest_path_all_pairs(graph, start_index);
+        std::vector<long> dist = parents_dist.second;
+        for (long i = 0; i < num_queries; ++i)
+        {
+            long from, to; std::cin >> from >> to;
+            long distance = dist[from][to];
+            if (distance == std::numeric_limits<long>::max() / 100)
+                std::cout << "Impossible" << std::endl;
+            else if (distance == std::numeric_limits<long>::min() / 100)
+                std::cout << "-Infinity" << std::endl;
+            else
+                std::cout << distance << std::endl;
+        }
+        for (const auto& edge_list : graph.out_edges)
+            for (const auto& edge : edge_list)
+                delete edge;
+        std::cout << std::endl;
+    }
+}
+
 /*
  * Solve the Kattis Union-Find problem.
  */
@@ -343,5 +380,6 @@ int main()
     /* kattis_shortest_path_non_neg(); */
     /* kattis_shortest_path_time_table(); */
     /* kattis_minimum_spanning_tree(); */
-    kattis_shortest_path_neg();
+    /* kattis_shortest_path_neg(); */
+    kattist_shortest_dist_all_pairs();
 }
