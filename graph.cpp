@@ -160,36 +160,26 @@ std::pair<long_vec, t_vec<T>> shortest_path_neg(const Graph<T>& graph,
                 dists[to] = NEG_INF;
                 parents[to] = from;
 
-                // Backtrack to mark all parent nodes in the negative clan
+                // Mark all descendants of start that are also descendants of
+                // negative loops
                 std::vector<bool> seen(num_nodes, false);
-                long current = to;
-                while (!seen[current])
+                std::queue<long> nodes;
+                nodes.push(from);
+                while (!nodes.empty())
                 {
-                    dists[current] = NEG_INF;
-                    current = parents[current];
-                    seen[current] = true;
+                    long fromm = nodes.front(); nodes.pop();
+                    for (const auto& edge : graph.out_edges[fromm])
+                    {
+                        long too = edge->to;
+                        if (!seen[too])
+                        {
+                            nodes.push(too);
+                            seen[too] = true;
+                            if (dists[fromm] == NEG_INF)
+                                dists[too] = NEG_INF;
+                        }
+                    }
                 }
-            }
-        }
-    }
-
-    // Mark all descendants of start that are also descendants of
-    // negative loops
-    std::vector<bool> seen(num_nodes, false);
-    std::queue<long> nodes;
-    nodes.push(start);
-    while (!nodes.empty())
-    {
-        long from = nodes.front(); nodes.pop();
-        for (const auto& edge : graph.out_edges[from])
-        {
-            long to = edge->to;
-            if (!seen[to])
-            {
-                nodes.push(to);
-                seen[to] = true;
-                if (dists[from] == NEG_INF)
-                    dists[to] = NEG_INF;
             }
         }
     }
