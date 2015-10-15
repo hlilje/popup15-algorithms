@@ -145,7 +145,12 @@ std::pair<long_vec, t_vec<T>> shortest_path_time(const Graph<T>& graph,
             long arrival_time = time[cheapest_node];
             long train_time   = arrival_time - t_0;
             long penalty      = 0;
-            if (train_time > 0) // First train has left
+
+            if (train_time == 0) // Right on time
+            {
+                penalty = 0;
+            }
+            else if (train_time > 0) // First train has left
             {
                 if (P == 0) // Only one train departure
                 {
@@ -153,15 +158,15 @@ std::pair<long_vec, t_vec<T>> shortest_path_time(const Graph<T>& graph,
                 }
                 else // Find next departure
                 {
-                    long t = train_time / P;     // Number of departures
-                    penalty = (t + 1) * P + t_0; // Next departure
-                    penalty -= arrival_time;
+                    penalty = P - (train_time % P); // Time to next departure
+                    if (penalty == P) penalty = 0;
                 }
             }
-            else // Take first departure
+            else // Wait for first departure
             {
                 penalty = -train_time;
             }
+
             // Distance through cheapest node
             T new_time = edge->weight + arrival_time + penalty;
             // For comparison
