@@ -341,7 +341,7 @@ int main()
     /* kattis_union_find(); */
     /* kattis_knapsack(); */
     /* kattis_shortest_path_non_neg(); */
-    /*kattis_shortest_path_time_table(); */
+    /* kattis_shortest_path_time_table(); */
     /* kattis_minimum_spanning_tree(); */
     kattis_shortest_path_neg();
 }

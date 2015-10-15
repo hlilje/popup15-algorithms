@@ -173,6 +173,27 @@ std::pair<long_vec, t_vec<T>> shortest_path_neg(const Graph<T>& graph,
         }
     }
 
+    // Mark all descendants of start that are also descendants of
+    // negative loops
+    std::vector<bool> seen(num_nodes, false);
+    std::queue<long> nodes;
+    nodes.push(start);
+    while (!nodes.empty())
+    {
+        long from = nodes.front(); nodes.pop();
+        for (const auto& edge : graph.out_edges[from])
+        {
+            long to = edge->to;
+            if (!seen[to])
+            {
+                nodes.push(to);
+                seen[to] = true;
+                if (dists[from] == NEG_INF)
+                    dists[to] = NEG_INF;
+            }
+        }
+    }
+
     return std::pair<long_vec, t_vec<T>>(parents, dists);
 }
 
