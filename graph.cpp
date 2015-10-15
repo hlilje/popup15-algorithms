@@ -215,8 +215,13 @@ t_vec<t_vec<T>> shortest_path_all_pairs(const Graph<T>& graph)
             for (long to = 0; to < (long) num_nodes; ++to) //for each destination
             {
                 //keep old or update
-                dists[from][to] = std::min(dists[from][to],
-                                           dists[from][k] + dists[k][to]);
+                T new_dist = dists[from][k] + dists[k][to];
+                if ((dists[from][k] == NEG_INF) || (dists[k][to] == NEG_INF))
+                    new_dist = NEG_INF;
+                else if ((dists[from][k] == INF) || (dists[k][to] == INF))
+                    new_dist = INF;
+                else if (new_dist < dists[from][to])
+                    dists[from][to] = new_dist;
             }
         }
     }
