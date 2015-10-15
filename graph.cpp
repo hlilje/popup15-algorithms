@@ -159,6 +159,16 @@ std::pair<long_vec, t_vec<T>> shortest_path_neg(const Graph<T>& graph,
             {
                 dists[to] = NEG_INF;
                 parents[to] = from;
+
+                // Backtrack to mark all parent nodes in the negative clan
+                std::vector<bool> seen(num_nodes, false);
+                long current = to;
+                while (!seen[current])
+                {
+                    dists[current] = NEG_INF;
+                    current = parents[current];
+                    seen[current] = true;
+                }
             }
         }
     }
