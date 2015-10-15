@@ -142,9 +142,9 @@ void kattis_minimum_spanning_tree()
         for (long i = 0; i < num_edges; ++i)
         {
             long u, v, weight; std::cin >> u >> v >> weight;
-            if (u > v) {
-                long temp = u;
-                u = v; v = temp;
+            if (u > v)
+            {
+                long t = u; u = v; v = t;
             }
             Edge<long>* edge = new Edge<long>(weight, u, v, 0, 0);
             graph.out_edges[u].push_back(edge);
