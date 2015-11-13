@@ -1,6 +1,6 @@
 /* Authors: Isak Nilsson, Hampus Liljekvist */
 
-#include <iostream>
+#include <string>
 #include <vector>
 
 
