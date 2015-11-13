@@ -46,3 +46,11 @@ void find(const std::string & pattern, std::vector<long> & indices,
         }
     }
 }
+
+void find(const std::vector<std::string> & patterns,
+          std::vector<std::vector<long>> & indices,
+          const std::string & text)
+{
+    for (size_t i = 0; i < patterns.size(); ++i)
+        find(patterns[i], indices[i], text);
+}

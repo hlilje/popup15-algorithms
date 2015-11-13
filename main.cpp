@@ -379,6 +379,7 @@ void kattis_union_find()
 /*
  * Solve the Kattis String Matching Problem
  */
+/*
 void kattis_string_matching()
 {
     std::string pattern;
@@ -392,6 +393,35 @@ void kattis_string_matching()
         for (const auto & index : indices)
             std::cout << index << " ";
         std::cout << std::endl;
+    }
+}
+*/
+
+/*
+ * Solve the Kattis String Multimatching Problem
+ */
+void kattis_string_multimatching()
+{
+    std::string pattern;
+    long num_patterns;
+    while (std::cin >> num_patterns)
+    {
+        std::cin.ignore();
+        std::vector<std::string> patterns(num_patterns);
+
+        for (long i = 0; i < num_patterns; ++i)
+            std::getline(std::cin, patterns[i]);
+
+        std::string text;
+        std::getline(std::cin, text);
+
+        std::vector<std::vector<long>> indices(num_patterns);
+        find(patterns, indices, text);
+        for (const auto & index_list: indices) {
+            for (const auto & index : index_list)
+                std::cout << index << " ";
+            std::cout << std::endl;
+        }
     }
 }
 
@@ -411,5 +441,6 @@ int main()
     /* kattis_minimum_spanning_tree(); */
     /* kattis_shortest_path_neg(); */
     /* kattis_shortest_path_all_pairs(); */
-    kattis_string_matching();
+    /* kattis_string_matching(); */
+    kattis_string_multimatching();
 }
