@@ -2,8 +2,9 @@
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 /* #include "fenwick.hpp" */
-/*#include "graph.hpp"*/
+/* #include "graph.hpp" */
 /* #include "interval_cover.hpp" */
+#include "kmp.hpp"
 /* #include "knapsack.hpp" */
 /* #include "lis.hpp" */
 /* #include "test_generator.hpp" */
@@ -12,7 +13,6 @@
 /* #include <cassert> */
 #include <iostream>
 /* #include <vector> */
-#include "kmp.hpp"
 
 
 /*
@@ -303,7 +303,6 @@ void kattis_shortest_path_neg()
 /*
  * Solve the Kattis All Pairs Shortest Path problem.
  */
-
 /*
 void kattis_shortest_path_all_pairs()
 {
@@ -338,7 +337,8 @@ void kattis_shortest_path_all_pairs()
                 delete edge;
         std::cout << std::endl;
     }
-}*/
+}
+*/
 
 /*
  * Solve the Kattis Union-Find problem.
@@ -376,22 +376,22 @@ void kattis_union_find()
 }
 */
 
-/*Solve the Kattis String Matching Problem*/
-
-
+/*
+ * Solve the Kattis String Matching Problem
+ */
 void kattis_string_matching()
 {
-    std::ios::sync_with_stdio(false);
     std::string pattern;
-    while(std::getline(std::cin,pattern)){
-        
+    while (std::getline(std::cin,pattern))
+    {
         std::vector<long> pi = make_pi(pattern);
-        
+
         std::string text;
         std::getline (std::cin,text);
-        
-        std::vector<long> indices = find(pattern,text,pi);
-        for (size_t i = 0; i<indices.size(); i++){
+
+        std::vector<long> indices = find(pattern, text, pi);
+        for (size_t i = 0; i < indices.size(); i++)
+        {
             std::cout << indices[i] << " ";
         }
         std::cout << std::endl;
@@ -413,6 +413,6 @@ int main()
     /* kattis_shortest_path_time_table(); */
     /* kattis_minimum_spanning_tree(); */
     /* kattis_shortest_path_neg(); */
-    /*kattis_shortest_path_all_pairs();*/
+    /* kattis_shortest_path_all_pairs(); */
     kattis_string_matching();
 }
