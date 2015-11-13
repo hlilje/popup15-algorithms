@@ -3,10 +3,9 @@
 #include "kmp.hpp"
 
 
-std::vector<long> make_pi(const std::string & pattern)
+void make_pi(const std::string & pattern, std::vector<long> & pi)
 {
-    std::vector<long> pi(pattern.length(), 0);
-    for (size_t position = 1; position<pattern.length(); position++)
+    for (size_t position = 1; position < pattern.length(); position++)
     {
         long state = pi[position - 1];
         while ((state > 0) && (pattern[state + 1] != pattern[position]))
@@ -16,27 +15,26 @@ std::vector<long> make_pi(const std::string & pattern)
         else
             pi[position] = 0;
     }
-
-    return pi;
 }
 
-std::vector<long> find(const std::string & pattern, const std::string & text)
+void find(const std::string & pattern, std::vector<long> & indices,
+          const std::string & text)
 {
-    std::vector<long> pi = make_pi(pattern);
-    std::vector<long> indices;
+    std::vector<long> pi(pattern.length(), 0);
     size_t q = 0;
-    for (size_t i = 0; i<text.length(); i++)
+
+    make_pi(pattern, pi);
+
+    for (size_t i = 0; i < text.length(); i++)
     {
         while ((q > 0) && (pattern[q] != text[i]))
-            q = pi[q-1];
+            q = pi[q - 1];
         if (pattern[q] == text[i])
             q = q+1;
-        if (q == (pattern.length() ))
+        if (q == (pattern.length()))
         {
             indices.push_back((i - pattern.length() + 1));
-            q = pi[q-1];
+            q = pi[q - 1];
         }
     }
-
-    return indices;
 }

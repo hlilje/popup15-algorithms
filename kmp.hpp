@@ -8,15 +8,15 @@
  * Create the KMP automaton.
  *
  * @param pattern: The pattern to build from.
- * @return:        A vector of epsilon state transitions.
+ * @param pi:      Vector to fill with state transition info.
  */
-std::vector<long> make_pi(const std::string &);
+void make_pi(const std::string &, std::vector<long> &);
 
 /*
  * Find start indices for all matching of `pattern` in `text`.
  *
- * @param pattern: The pattern to match.
- * @param text:    The text to match on.
- * @return:        The matching indices.
+ * @param pattern:  The pattern to match.
+ * @param indicies: The indices of found matches.
+ * @param text:     The text to match on.
  */
-std::vector<long> find(const std::string &, const std::string &);
+void find(const std::string &, std::vector<long> &, const std::string &);
