@@ -1,5 +1,4 @@
 #include "crt.hpp"
-#include <iostream>
 
 using ll = long long;
 
@@ -12,6 +11,8 @@ ll mul_inv(ll a, ll b)
 
     if (b == 1) return 1;
 
+    // Compute the modular multiplicative inverse using the Extended
+    // Euclidian algorithm
     while (a > 1)
     {
         ll q = a / b;
@@ -32,11 +33,11 @@ ll crt(const ll a, const ll n, const ll b, const ll m, const ll K)
 {
     ll res = 0;
 
-    ll inv = mul_inv(m, n);
-    res += a * inv * m;
+    ll inv = mul_inv(m, n); // (m * inv) mod n = 1
+    res += a * inv * m;     // = 0 mod m, = a mod n
 
-    inv = mul_inv(n, m);
-    res += b * inv * n;
+    inv = mul_inv(n, m); // (n * inv) mod m = 1
+    res += b * inv * n;  // = 0 mod n, = a mod m
 
     return res % K;
 }
