@@ -389,8 +389,8 @@ void kattis_string_matching()
 
         std::vector<long> indices;
         find(pattern, indices, text);
-        for (size_t i = 0; i < indices.size(); i++)
-            std::cout << indices[i] << " ";
+        for (const auto & index : indices)
+            std::cout << index << " ";
         std::cout << std::endl;
     }
 }

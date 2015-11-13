@@ -7,7 +7,7 @@
 /*
  * Create the KMP automaton.
  *
- * @param pattern: The pattern to build from.
+ * @param P: The pattern to build from.
  * @param pi:      Vector to fill with state transition info.
  */
 void make_pi(const std::string &, std::vector<long> &);

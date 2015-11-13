@@ -3,38 +3,41 @@
 #include "kmp.hpp"
 
 
-void make_pi(const std::string & pattern, std::vector<long> & pi)
+void make_pi(const std::string & P, std::vector<long> & pi)
 {
-    for (size_t position = 1; position < pattern.length(); position++)
+    const size_t m = P.length();
+    for (size_t q = 2; q <= m; ++q)
     {
-        long state = pi[position - 1];
-        while ((state > 0) && (pattern[state + 1] != pattern[position]))
-            state = pi[state];
-        if (pattern[state] == pattern[position])
-            pi[position] = state + 1;
+        long k = pi[q - 1];
+        while ((k > 0) && (P[k] != P[q - 1]))
+            k = pi[k];
+        if (P[k] == P[q - 1])
+            pi[q] = k + 1;
         else
-            pi[position] = 0;
+            pi[q] = 0;
     }
 }
 
 void find(const std::string & pattern, std::vector<long> & indices,
           const std::string & text)
 {
-    std::vector<long> pi(pattern.length(), 0);
+    std::vector<long> pi(pattern.length() + 1, 0); // 1 indexed
+    const size_t m = pattern.length();
+    const size_t n = text.length();
     size_t q = 0;
 
     make_pi(pattern, pi);
 
-    for (size_t i = 0; i < text.length(); i++)
+    for (size_t i = 1; i <= n; i++)
     {
-        while ((q > 0) && (pattern[q] != text[i]))
-            q = pi[q - 1];
-        if (pattern[q] == text[i])
-            q = q+1;
-        if (q == (pattern.length()))
+        while ((q > 0) && (pattern[q] != text[i - 1]))
+            q = pi[q];
+        if (pattern[q] == text[i - 1])
+            ++q;
+        if (q == m)
         {
-            indices.push_back((i - pattern.length() + 1));
-            q = pi[q - 1];
+            indices.push_back((i - m)); // 0 indexed
+            q = pi[q];
         }
     }
 }
