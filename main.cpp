@@ -382,18 +382,14 @@ void kattis_union_find()
 void kattis_string_matching()
 {
     std::string pattern;
-    while (std::getline(std::cin,pattern))
+    while (std::getline(std::cin, pattern))
     {
-        std::vector<long> pi = make_pi(pattern);
-
         std::string text;
-        std::getline (std::cin,text);
+        std::getline(std::cin, text);
 
-        std::vector<long> indices = find(pattern, text, pi);
+        std::vector<long> indices = find(pattern, text);
         for (size_t i = 0; i < indices.size(); i++)
-        {
             std::cout << indices[i] << " ";
-        }
         std::cout << std::endl;
     }
 }
@@ -402,7 +398,7 @@ void kattis_string_matching()
 int main()
 {
     // Turn off sync with C I/O for speed
-    std::cin.sync_with_stdio(false);
+    std::ios::sync_with_stdio(false);
 
     /* kattis_interval_cover(); */
     /* kattis_longest_increasing_subsequence(); */
