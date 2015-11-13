@@ -5,6 +5,9 @@
 
 void make_pi(const std::string & P, std::vector<long> & pi)
 {
+    // Bootstrap construction of state automaton that will keep
+    // track of how long a suffix of the search string is currently
+    // matched.
     const size_t m = P.length();
     for (size_t q = 2; q <= m; ++q)
     {
@@ -28,6 +31,8 @@ void find(const std::string & pattern, std::vector<long> & indices,
 
     make_pi(pattern, pi);
 
+    // Continuously update state of automaton. Whenever end state is
+    // reached, add index of found match and make epsilon transition.
     for (size_t i = 1; i <= n; i++)
     {
         while ((q > 0) && (pattern[q] != text[i - 1]))
