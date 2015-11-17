@@ -1,7 +1,6 @@
 /*
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
-#include "crt.hpp"
 /* #include "fenwick.hpp" */
 /* #include "graph.hpp" */
 /* #include "interval_cover.hpp" */
@@ -428,19 +427,6 @@ void kattis_string_multimatching()
 }
 */
 
-void kattis_chinese_remainder() {
-    int num_testcases; std::cin >> num_testcases;
-
-    for (int i = 0; i < num_testcases; ++i)
-    {
-        unsigned long long a, n, b, m;
-        std::cin >> a >> n >> b >> m;
-
-        const unsigned long long K = n * m;
-        std::cout << crt(a, n, b, m, K) << " " << K << std::endl;
-    }
-}
-
 
 int main()
 {
@@ -459,5 +445,4 @@ int main()
     /* kattis_shortest_path_all_pairs(); */
     /* kattis_string_matching(); */
     /* kattis_string_multimatching(); */
-    kattis_chinese_remainder();
 }
