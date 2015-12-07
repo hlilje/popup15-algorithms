@@ -430,6 +430,7 @@ void kattis_string_multimatching()
 }
 */
 
+/*
 void kattis_polygon_area()
 {
     int num_vertices;
@@ -444,9 +445,44 @@ void kattis_polygon_area()
 
         double area = simple_polygon_area(points);
 
-        if (area > 0.0)
-            std::cout << "C";
+        if (area >= 0.0) std::cout << "C";
         std::cout << "CW " << std::fixed << std::setprecision(1) << std::abs(area) << std::endl;
+    }
+}
+*/
+
+void kattis_point_in_polygon()
+{
+    int num_vertices, num_points;
+    while (std::cin >> num_vertices && num_vertices != 0)
+    {
+        std::vector<Point<int>> vertices;
+        for (int i = 0; i < num_vertices; ++i)
+        {
+            int x, y; std::cin >> x >> y;
+            vertices.emplace_back(Point<int>(x, y));
+        }
+
+        std::cin >> num_points;
+
+        std::vector<Point<int>> points;
+        for (int i = 0; i < num_points; ++i)
+        {
+            int x, y; std::cin >> x >> y;
+            points.emplace_back(Point<int>(x, y));
+        }
+
+        for (const auto & point : points)
+        {
+            int res = point_in_polygon(point, vertices);
+
+            if (res == 0)
+                std::cout << "on" << std::endl;
+            else if (res == 1)
+                std::cout << "in" << std::endl;
+            else if (res == -1)
+                std::cout << "out" << std::endl;
+        }
     }
 }
 
@@ -467,5 +503,6 @@ int main()
     /* kattis_shortest_path_all_pairs(); */
     /* kattis_string_matching(); */
     /* kattis_string_multimatching(); */
-    kattis_polygon_area();
+    /* kattis_polygon_area(); */
+    kattis_point_in_polygon();
 }
