@@ -2,6 +2,7 @@
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 /* #include "fenwick.hpp" */
+#include "geometry.hpp"
 /* #include "graph.hpp" */
 /* #include "interval_cover.hpp" */
 /* #include "kmp.hpp" */
@@ -12,8 +13,9 @@
 /* #include "union_find.hpp" */
 /* #include <algorithm> */
 /* #include <cassert> */
+#include <iomanip>
 #include <iostream>
-/* #include <vector> */
+#include <vector>
 
 
 /*
@@ -428,6 +430,25 @@ void kattis_string_multimatching()
 }
 */
 
+void kattis_polygon_area()
+{
+    int num_vertices;
+    while (std::cin >> num_vertices && num_vertices != 0)
+    {
+        std::vector<Point<int>> points;
+        for (int i = 0; i < num_vertices; ++i)
+        {
+            int x, y; std::cin >> x >> y;
+            points.emplace_back(Point<int>(x, y));
+        }
+
+        double area = simple_polygon_area(points);
+
+        if (area > 0.0)
+            std::cout << "C";
+        std::cout << "CW " << std::fixed << std::setprecision(1) << std::abs(area) << std::endl;
+    }
+}
 
 int main()
 {
@@ -446,8 +467,5 @@ int main()
     /* kattis_shortest_path_all_pairs(); */
     /* kattis_string_matching(); */
     /* kattis_string_multimatching(); */
-    Point<int> p1(1, 0);
-    Point<int> p2(0, 1);
-    Point<int> p3(0, 0);
-    std::cout << p3.angle(p2, p1) << std::endl;
+    kattis_polygon_area();
 }
