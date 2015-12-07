@@ -380,7 +380,7 @@ void kattis_union_find()
 */
 
 /*
- * Solve the Kattis String Matching Problem
+ * Solve the Kattis String Matching problem.
  */
 /*
 void kattis_string_matching()
@@ -401,7 +401,7 @@ void kattis_string_matching()
 */
 
 /*
- * Solve the Kattis String Multimatching Problem
+ * Solve the Kattis String Multimatching problem.
  */
 /*
 void kattis_string_multimatching()
@@ -431,6 +431,9 @@ void kattis_string_multimatching()
 */
 
 /*
+ * Solve the Kattis Polygon Area problem.
+ */
+/*
 void kattis_polygon_area()
 {
     int num_vertices;
@@ -451,6 +454,9 @@ void kattis_polygon_area()
 }
 */
 
+/*
+ * Solve the Kattis Point in Polygon problem.
+ */
 void kattis_point_in_polygon()
 {
     int num_vertices, num_points;
