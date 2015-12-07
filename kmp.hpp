@@ -1,5 +1,7 @@
 /* Authors: Isak Nilsson, Hampus Liljekvist */
 
+#pragma once
+
 #include <string>
 #include <vector>
 

@@ -7,6 +7,7 @@
 /* #include "kmp.hpp" */
 /* #include "knapsack.hpp" */
 /* #include "lis.hpp" */
+#include "point.hpp"
 /* #include "test_generator.hpp" */
 /* #include "union_find.hpp" */
 /* #include <algorithm> */
@@ -445,4 +446,8 @@ int main()
     /* kattis_shortest_path_all_pairs(); */
     /* kattis_string_matching(); */
     /* kattis_string_multimatching(); */
+    Point<int> p1(1, 0);
+    Point<int> p2(0, 1);
+    Point<int> p3(0, 0);
+    std::cout << p3.angle(p2, p1) << std::endl;
 }
