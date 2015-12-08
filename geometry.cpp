@@ -37,12 +37,11 @@ int point_in_polygon(const Point<T> & point,
         Point<T> p1 = vertices[i];
         Point<T> p2 = vertices[(i + 1) % vertices.size()];
 
-        double angle = point.angle(p1, p2);
+        // Check if point lies on line segment
+        if (p1.distance(point) + point.distance(p2) == p1.distance(p2))
+            return 0;
 
-        // Check for point on polygon side
-        if (std::abs(angle) == M_PI) return 0;
-
-        tot_angle += angle;
+        tot_angle += point.angle(p1, p2);
     }
 
     // Should be pi, but large margin for error
