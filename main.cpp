@@ -2,15 +2,15 @@
  * Authors: Hampus Liljekvist, Isak Nilsson
  */
 /* #include "fenwick.hpp" */
-#include "geometry.hpp"
-/* #include "graph.hpp" */
+/* #include "geometry.hpp" */
+#include "graph.hpp"
 /* #include "interval_cover.hpp" */
 /* #include "kmp.hpp" */
 /* #include "knapsack.hpp" */
 /* #include "lis.hpp" */
-#include "point.hpp"
-/* #include "test_generator.hpp" */
-/* #include "union_find.hpp" */
+/* #include "point.hpp" */
+#include "test_generator.hpp"
+#include "union_find.hpp"
 /* #include <algorithm> */
 /* #include <cassert> */
 #include <iomanip>
@@ -181,7 +181,7 @@ void kattis_minimum_spanning_tree()
  * Solve the Kattis Single Source Shortest Path, Non-Negative Weights problem.
  * Additionally solves the construction problem.
  */
-/*
+
 void kattis_shortest_path_non_neg()
 {
     long n, m, q, s;
@@ -201,6 +201,8 @@ void kattis_shortest_path_non_neg()
         std::pair<std::vector<long>, std::vector<long>> parents_dist =
                 shortest_path(graph, s);
         std::vector<long> dist = parents_dist.second;
+        std::vector<long> pars = parents_dist.first;
+
         for (long i = 0; i < q; ++i)
         {
             long target; std::cin >> target;
@@ -209,6 +211,12 @@ void kattis_shortest_path_non_neg()
                 std::cout << distance << std::endl;
             else
                 std::cout << "Impossible" << std::endl;
+//            while (pars[target] != target){
+//                std::cout << target << "<-";
+//                target = pars[target];
+//            }
+            //std::cout << target;
+            //std::cout << std::endl;
         }
         for (const auto& edge_list : graph.out_edges)
             for (const auto& edge : edge_list)
@@ -216,7 +224,7 @@ void kattis_shortest_path_non_neg()
         std::cout << std::endl;
     }
 }
-*/
+
 
 /*
  * Solve the Kattis Single Source Shortest Path, Time Table problem.
@@ -457,40 +465,40 @@ void kattis_polygon_area()
 /*
  * Solve the Kattis Point in Polygon problem.
  */
-void kattis_point_in_polygon()
-{
-    int num_vertices, num_points;
-    while (std::cin >> num_vertices && num_vertices != 0)
-    {
-        std::vector<Point<int>> vertices;
-        for (int i = 0; i < num_vertices; ++i)
-        {
-            int x, y; std::cin >> x >> y;
-            vertices.emplace_back(Point<int>(x, y));
-        }
-
-        std::cin >> num_points;
-
-        std::vector<Point<int>> points;
-        for (int i = 0; i < num_points; ++i)
-        {
-            int x, y; std::cin >> x >> y;
-            points.emplace_back(Point<int>(x, y));
-        }
-
-        for (const auto & point : points)
-        {
-            int res = point_in_polygon(point, vertices);
-
-            if (res == 0)
-                std::cout << "on" << std::endl;
-            else if (res == 1)
-                std::cout << "in" << std::endl;
-            else if (res == -1)
-                std::cout << "out" << std::endl;
-        }
-    }
-}
+//void kattis_point_in_polygon()
+//{
+//    int num_vertices, num_points;
+//    while (std::cin >> num_vertices && num_vertices != 0)
+//    {
+//        std::vector<Point<int>> vertices;
+//        for (int i = 0; i < num_vertices; ++i)
+//        {
+//            int x, y; std::cin >> x >> y;
+//            vertices.emplace_back(Point<int>(x, y));
+//        }
+//
+//        std::cin >> num_points;
+//
+//        std::vector<Point<int>> points;
+//        for (int i = 0; i < num_points; ++i)
+//        {
+//            int x, y; std::cin >> x >> y;
+//            points.emplace_back(Point<int>(x, y));
+//        }
+//
+//        for (const auto & point : points)
+//        {
+//            int res = point_in_polygon(point, vertices);
+//
+//            if (res == 0)
+//                std::cout << "on" << std::endl;
+//            else if (res == 1)
+//                std::cout << "in" << std::endl;
+//            else if (res == -1)
+//                std::cout << "out" << std::endl;
+//        }
+//    }
+//}
 
 int main()
 {
@@ -502,7 +510,8 @@ int main()
     /* kattis_fenwick_tree(); */
     /* kattis_union_find(); */
     /* kattis_knapsack(); */
-    /* kattis_shortest_path_non_neg(); */
+    //generate_bad_shortest_path_demo(250);
+    kattis_shortest_path_non_neg();
     /* kattis_shortest_path_time_table(); */
     /* kattis_minimum_spanning_tree(); */
     /* kattis_shortest_path_neg(); */
@@ -510,5 +519,5 @@ int main()
     /* kattis_string_matching(); */
     /* kattis_string_multimatching(); */
     /* kattis_polygon_area(); */
-    kattis_point_in_polygon();
+    /*kattis_point_in_polygon(); */
 }

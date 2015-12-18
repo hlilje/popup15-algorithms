@@ -31,3 +31,14 @@ void generate_union_find_test(const long long int);
  * @param requests: Number of requested distances.
  */
 void generate_shortest_path_test(const long, const long, const long);
+
+
+/*
+ * Generate a test case showcasing the drawbacks of the old,
+ * incorrect shortest_path_non_neg (Dijkstra).
+ *
+ * @param size: The desired number of nodes in the (complete) graph.
+ */
+ 
+void generate_bad_shortest_path_demo(const long long int);
+

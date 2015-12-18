@@ -36,7 +36,7 @@ template<typename T>
 bool PairComp<T>::operator()(const std::pair<T, long>& a,
                              const std::pair<T, long>& b)
 {
-    return a.first < b.first;
+    return a.first > b.first;
 }
 
 
@@ -92,24 +92,31 @@ std::pair<long_vec, t_vec<T>> shortest_path(const Graph<T>& graph,
 
     active.emplace(std::pair<T, long>(dist[start], start));
 
+    std::vector<bool> finalized(num_nodes, false);
+    
     while (!active.empty())
     {
         // Find cheapest active node
         long cheapest_node = active.top().second;
         active.pop();
-
-        // Check if neighbours of cheapest node has changed
-        for (const auto& edge : graph.out_edges[cheapest_node])
-        {
-            // Distance through cheapest node
-            long next_node = edge->to;
-            T new_dist = edge->weight + dist[cheapest_node];
-            if (new_dist < dist[next_node])
+        //std::cout << "popped " << cheapest_node << ", dist now is " << dist[cheapest_node] << std::endl;
+        
+        if (!finalized[cheapest_node]){
+            finalized[cheapest_node] = true;
+            // Check if neighbours of cheapest node has changed
+            for (const auto& edge : graph.out_edges[cheapest_node])
             {
-                parents[next_node] = cheapest_node;
-                // NOTE: Incorrect, but faster on Kattis
-                active.emplace(std::pair<T, long>(dist[next_node], next_node));
-                dist[next_node] = new_dist;
+                // Distance through cheapest node
+                long next_node = edge->to;
+                T new_dist = edge->weight + dist[cheapest_node];
+                if (new_dist < dist[next_node])
+                {
+                    parents[next_node] = cheapest_node;
+                    
+                    dist[next_node] = new_dist;
+                    active.emplace(std::pair<T, long>(dist[next_node], next_node));
+
+                }
             }
         }
     }
